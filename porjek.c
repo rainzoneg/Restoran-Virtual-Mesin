@@ -6,6 +6,7 @@
 #include <string.h>
 #include <conio.h>
 #include "library.h"
+#define ESC 27
 
 char username[50];
 char password[50];
@@ -49,7 +50,7 @@ char menu(){
 	system("color AF");
 	printf("\n    User: %s", username);
 	printf("\n    Saldo: Rp %d", cash);
-	printf("\n\n\n\n\n\n\n");
+	printf("\n\n\n\n\n");
 	printf("\t\t\t\t\t Program Mememesan Makanan\n\n\n");
 	printf("\t\t\t\t\t\t1.Pesan Makanan!\n\n");
 	printf("\t\t\t\t\t\t2.Isi Saldo\n\n");
@@ -76,7 +77,7 @@ char menu(){
 		case '5':
 			system("cls");
 			printf ("Terima kasih telah mencoba !\n");
-			return 0;
+			exit(0);
 		default:
 			printf ("Input salah !\n");
 			printf ("Masukan angka menu dengan benar.\n");
@@ -97,7 +98,8 @@ char pesan()
 	printf("\n    User: %s", username);
 	printf("\n    Saldo: Rp %d", cash);
 	printf("\n\n\n\n\n\t\t\t\tMasukan restoran yang ingin anda pesan!\n\t\t\t  ");
-	printf("\tMasukan angka sesuai restoran Anda tuju! (Ketik 0 untuk ganti halaman)\n\t\t\t  ");
+	printf("\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
+	printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Pulau Jawa\t\t\t\tB. Pulau Sumatera");
 	printf("\n\t\t\t\t1. Restoran A\t\t\t\t4. Restoran A");
 	printf("\n\t\t\t\t2. Restoran B\t\t\t\t5. Restoran B");
@@ -134,13 +136,16 @@ char pesan()
 		case '9':
 			x=2;
 			break;
+		case ESC:
+			menu();
 		case '0':
 			system("cls");
 			system("color 30");
 			printf("\n    User: %s", username);
 			printf("\n    Saldo: Rp %d", cash);
 			printf("\n\n\n\n\n\t\t\t\tMasukan restoran yang ingin anda pesan!\n\t\t\t  ");
-			printf("\tMasukan angka sesuai restoran Anda tuju! (Ketik 0 untuk ganti halaman)\n\t\t\t  ");
+			printf("\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
+			printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
 			printf("\n\n\t\t\t\tD. Pulau Sulawesi");
 			printf("\n\t\t\t\t1. Restoran A");
 			printf("\n\t\t\t\t2. Restoran B");
@@ -170,6 +175,8 @@ char pesan()
 			break;
 			case '0':
 			pesan();
+			case ESC:
+			menu();
 			break;
 			default:
 				printf ("Input salah !\n");
@@ -218,7 +225,7 @@ void help(){
 	system("color AF");
 	printf("\n    User: %s", username);
 	printf("\n    Saldo: Rp %d", cash);
-	printf("\n\n\n\n\n\n\n\n");
+	printf("\n\n\n\n\n\n");
 	printf("\t\t\t\t\t Cara menggunakan Food Delivery System:\n\n");
 	printf("\t\t\t\t 1. Pilih menu dituju dengan memasukkan angka sesuai tertera pada layar\n ");
 	printf("\t\t\t\t 2. Anda dapat mengisi saldo terlebih dahulu \n");
@@ -261,19 +268,12 @@ char login(){
 		}
 		else{
 			printf("\n\t\t\t\tNama atau password tidak sesuai! ");
-			n++;
-			if(n>3){
-				Sleep(1000);
-				printf("\n\t\t\t\tLogin tidak sesuai sebanyak 3 kali, akses diblokir sementara\n\n\n\n\n");
-				return 0;
-			}
-			else{
-				printf("Coba lagi.");
-				Sleep(1000);
-			}
+			printf("Coba lagi.");
+			Sleep(1000);
+			
 		}
 		
-	}while(n<=3);
+	}while(n=1);
 	
 	printf("\n\t\t\t\t\tSelamat datang, %s", username);
 	Sleep(200);
@@ -290,13 +290,24 @@ void refill() {
 	system("cls");
 	int a;
 	do{
+		printf("\n\t\t\t\t\t\t      User: %s", username);
+		printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+		printf("\n\n\n");
 		printf("Masukan saldo Anda : ");
 		scanf("%d", &a);
 		if(a<5000)
 		{
 			printf("\nMaaf, Anda dapat mengisi saldo minimal 5000 rupiah\n\n");
-			system("pause");
-			system("cls");
+			fflush(stdin);
+			printf("Ketik apapun untuk mencoba lagi, atau ESC untuk kembali ke halaman utama");
+			switch(getch()){
+				case ESC:
+					menu();
+					break;
+				default:
+					system("cls");
+			}
+			
 		}
 	} while(a<5000);
 	cash+=a;
@@ -308,26 +319,11 @@ void refill() {
 	printf(".");
 	Sleep(500);
 	system("cls");
-	printf("\nTransaksi Berhasil");
+	printf("\n\t\t\t\t\t\t      User: %s", username);
+	printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+	printf("\n\n\nTransaksi Berhasil");
+	Sleep(400);
+	printf("\n\nKetik apapun untuk kembali...");
 	getch();
 	
 }
-
-/* sebelum sign up system*/
-/*printf("\t\t\t\t\t\t\tLogin\n\n\n");
-	printf("\t\t\t\t\tNama anda:    ");
-	fgets(username, 100, stdin);
-	while(username[0]=='\n'){
-		printf("\n\t\t\t\t\tNama tidak boleh kosong");
-		Sleep(1000);
-		return main();
-	}
-	printf("\n\t\t\t\t\tSelamat datang, %s", username);
-	Sleep(200);
-	printf("\n\t\t\t\t\tPlease wait.");
-	Sleep(400);
-	printf(".");
-	Sleep(400);
-	printf(".");
-	Sleep(500);
-	menu();*/
