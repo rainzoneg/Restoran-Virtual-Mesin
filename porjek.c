@@ -98,8 +98,7 @@ char pesan()
 	printf("\n    User: %s", username);
 	printf("\n    Saldo: Rp %d", cash);
 	printf("\n\n\n\n\n\t\t\t\tMasukan restoran yang ingin anda pesan!\n\t\t\t  ");
-	printf("\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
-	printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
+	printf("\tMasukan angka sesuai restoran Anda tuju! (Ketik 0 untuk ganti halaman)\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Pulau Jawa\t\t\t\tB. Pulau Sumatera");
 	printf("\n\t\t\t\t1. Restoran A\t\t\t\t4. Restoran A");
 	printf("\n\t\t\t\t2. Restoran B\t\t\t\t5. Restoran B");
@@ -111,41 +110,47 @@ char pesan()
 	switch(getch()){
 		case '1':
 			x=0;
+			price=food1(username, cash);
 			break;
 		case '2':
 			x=0;
+			price=food2(username, cash);
 			break;
 		case '3':
 			x=0;
+			price=food3(username, cash);
 			break;
 		case '4':
 			x=1;
+			price=food4(username, cash);
 			break;
 		case '5':
 			x=1;
+			price=food5(username, cash);
 			break;
 		case '6':
 			x=1;
+			price=food6(username, cash);
 			break;
 		case '7':
 			x=2;
+			price=food7(username, cash);
 			break;
 		case '8':
 			x=2;
+			price=food8(username, cash);
 			break;
 		case '9':
 			x=2;
+			price=food9(username, cash);
 			break;
-		case ESC:
-			menu();
 		case '0':
 			system("cls");
 			system("color 30");
 			printf("\n    User: %s", username);
 			printf("\n    Saldo: Rp %d", cash);
 			printf("\n\n\n\n\n\t\t\t\tMasukan restoran yang ingin anda pesan!\n\t\t\t  ");
-			printf("\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
-			printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
+			printf("\tMasukan angka sesuai restoran Anda tuju! (Ketik 0 untuk ganti halaman)\n\t\t\t  ");
 			printf("\n\n\t\t\t\tD. Pulau Sulawesi");
 			printf("\n\t\t\t\t1. Restoran A");
 			printf("\n\t\t\t\t2. Restoran B");
@@ -156,27 +161,31 @@ char pesan()
 			printf("\n\t\t\t\t6. Restoran C\n\n\n");
 			switch(getch()){
 			case '1':
-			x=3;
-			break;
+				x=3;
+				price=food10(username, cash);
+				break;
 			case '2':
-			x=3;
-			break;
+				x=3;
+				price=food11(username, cash);			
+				break;
 			case '3':
-			x=3;
-			break;
+				x=3;
+				price=food12(username, cash);
+				break;
 			case '4':
-			x=4;
+				x=4;
+				price=food13(username, cash);			
 			break;
-			case '5':
-			x=4;
+				case '5':
+				x=4;
+				price=food14(username, cash);			
 			break;
-			case '6':
-			x=4;
-			break;
+				case '6':
+				x=4;
+				price=food15(username, cash);			
+				break;
 			case '0':
 			pesan();
-			case ESC:
-			menu();
 			break;
 			default:
 				printf ("Input salah !\n");
