@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <string.h>
-#include <conio.h>
 #include "library.h"
 #define ESC 27
 
@@ -97,16 +96,16 @@ char pesan()
 	system("color 30");
 	printf("\n    User: %s", username);
 	printf("\n    Saldo: Rp %d", cash);
-	printf("\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
+	printf("\n\n\n\n\t\t\t\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
 	printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Pulau Jawa\t\t\t\tB. Pulau Sumatera");
-	printf("\n\t\t\t\t1. Restoran A\t\t\t\t4. Restoran A");
-	printf("\n\t\t\t\t2. Restoran B\t\t\t\t5. Restoran B");
-	printf("\n\t\t\t\t3. Restoran C\t\t\t\t6. Restoran C");
+	printf("\n\t\t\t\t1. Koeno Koeni Resto\t\t\t4. Rumah Makan Simpang Raya");
+	printf("\n\t\t\t\t2. Oseng Mercon Bu Narti Malioboro\t5. Nasi Kapau Uni Liis");
+	printf("\n\t\t\t\t3. RM Sari Rasa\t\t\t\t6. Bundo Kanduang");
 	printf("\n\n\t\t\t\tC. Pulau Kalimantan");
-	printf("\n\t\t\t\t7. Restoran A");
-	printf("\n\t\t\t\t8. Restoran B");
-	printf("\n\t\t\t\t9. Restoran C\n\n\n");
+	printf("\n\t\t\t\t7. Kuin Abdhu Gunung Sari");
+	printf("\n\t\t\t\t8. Rumah Makan Tjilik Riwut ");
+	printf("\n\t\t\t\t9. Tepian Pandan Tenggarong\n\n\n");
 	switch(getch()){
 		case '1':
 			x=0;
@@ -155,13 +154,13 @@ char pesan()
 			printf("\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
 			printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
 			printf("\n\n\t\t\t\tD. Pulau Sulawesi");
-			printf("\n\t\t\t\t1. Restoran A");
-			printf("\n\t\t\t\t2. Restoran B");
-			printf("\n\t\t\t\t3. Restoran C");
+			printf("\n\t\t\t\t1. Coto Nusantara");
+			printf("\n\t\t\t\t2. Konro Karebosi");
+			printf("\n\t\t\t\t3. Pondok Raya Minahasa");
 			printf("\n\n\t\t\t\tE. Pulau Papua");
-			printf("\n\t\t\t\t4. Restoran A");
-			printf("\n\t\t\t\t5. Restoran B");
-			printf("\n\t\t\t\t6. Restoran C\n\n\n");
+			printf("\n\t\t\t\t4. Resto Apung Tomarokai");
+			printf("\n\t\t\t\t5. Yougwa Danau Sentani");
+			printf("\n\t\t\t\t6. Kitong Papua Resto\n\n\n");
 			switch(getch()){
 			case '1':
 				x=3;
@@ -178,21 +177,21 @@ char pesan()
 			case '4':
 				x=4;
 				price=food13(username, cash);			
-			break;
-				case '5':
+				break;
+			case '5':
 				x=4;
 				price=food14(username, cash);			
-			break;
-				case '6':
+				break;
+			case '6':
 				x=4;
 				price=food15(username, cash);			
 				break;
 			case '0':
-			pesan();
-			break;
+				pesan();
+				break;
 			case ESC:
-			menu();
-			break;
+				menu();
+				break;
 			default:
 				printf ("Input salah !\n");
 				printf ("Masukan angka menu dengan benar.\n");

@@ -5,6 +5,18 @@ int size; //Isi array
 
 
 
+//TODO: Menghias Struk
+void struk(int price_food[50], int count[50], int size) {
+	int i;
+	for(i=0;i<size;i++) {
+		printf("\n\n\t\t\t\tHarga Makanan/Minuman\tBanyak\tHarga\n");
+		printf("\t\t\t\tNama Makanan/minuman\t%d\t%d", count[i], price_food[i]);
+	}
+}
+
+
+
+
 int distance(int restaurant, int location, int price) 
 {
 //	jawa = 0;
@@ -70,7 +82,8 @@ int distance(int restaurant, int location, int price)
 int food1(char username[50], int cash) 
 {
 	int price_food[50], count[50];
-	int size, total=0;
+	int size=0;
+	int total=0;
 	int option;
 
 	char check;
@@ -170,7 +183,7 @@ int food2(char username[50], int cash)
 	printf("\n\t\t\t\t2. Oseng Mercon\t\tRp 7.000");
 	printf("\n\t\t\t\t3. Gethuk Goreng\tRp 3.000");
 	printf("\n\t\t\t\t4. Berkecek\t\tRp 10.000");
-	printf("\n\t\t\t\t5. Karang Gesing\tRp 5.000");
+	printf("\n\t\t\t\t5. Carang Gesing\tRp 5.000");
 	printf("\n\n\t\t\t\tB. Minuman :");
 	printf("\n\t\t\t\t6. Sekoteng\t\tRp 8.000");
 	printf("\n\t\t\t\t7. Bajigur\t\tRp 7.000");
@@ -252,8 +265,8 @@ int food3(char username[50], int cash)
 	printf("\n\n\t\t\t\tA. Makanan :");
 	printf("\n\t\t\t\t1. Tiwul\t\tRp 15.000");
 	printf("\n\t\t\t\t2. Jadah Tempe\t\tRp 5.000");
-	printf("\n\t\t\t\t3. Garang Asem\t\tRp 7.000");
-	printf("\n\t\t\t\t4. Mie Ongklok\t\tRp 12.000");
+	printf("\n\t\t\t\t3. Garang Asem\t\tRp 8.000");
+	printf("\n\t\t\t\t4. Tahu Petis\t\tRp 4.000");
 	printf("\n\t\t\t\t5. Lumpia\t\tRp 5.000");
 	printf("\n\n\t\t\t\tB. Minuman :");
 	printf("\n\t\t\t\t6. Wedang Pokak\t\tRp 10.000");
@@ -273,11 +286,11 @@ int food3(char username[50], int cash)
 		}
 		else if(option==3)
 		{
-			option=7000;
+			option=8000;
 		}
 		else if(option==4)
 		{
-			option=12000;
+			option=4000;
 		}
 		else if(option==5)
 		{
@@ -588,9 +601,9 @@ int food7(char username[50], int cash)
 	printf("\n\n\t\t\t\tA. Makanan :");
 	printf("\n\t\t\t\t1. Soto Banjar\t\tRp 18.500");
 	printf("\n\t\t\t\t2. Mie Sagu\t\tRp 13.000");
-	printf("\n\t\t\t\t3. Chai Kue\t\tRp 6.500");
+	printf("\n\t\t\t\t3. Mandai\t\tRp 6.500");
 	printf("\n\t\t\t\t4. Bubur Pedas\t\tRp 12.500");
-	printf("\n\t\t\t\t5. Ayam Cincane\t\tRp 10.000");
+	printf("\n\t\t\t\t5. Iwak Pakasam\t\tRp 10.000");
 	printf("\n\n\t\t\t\tB. Minuman :");
 	printf("\n\t\t\t\t6. Es Lidah Buaya\tRp 8.000");
 	printf("\n\t\t\t\t7. Es Teler Pontianak\tRp 10.000");
@@ -670,13 +683,13 @@ int food8(char username[50], int cash)
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
-	printf("\n\t\t\t\t1. Juhu Umbut Sawi\tRp 14.000");
-	printf("\n\t\t\t\t2. Iwak Pakasam\t\tRp 13.000");
+	printf("\n\t\t\t\t1. Juhu Umbut Sawit\tRp 14.000");
+	printf("\n\t\t\t\t2. Kalumpe/Karuang\tRp 10.000");
 	printf("\n\t\t\t\t3. Amparan Tatak\tRp 7.500");
-	printf("\n\t\t\t\t4. Manday\t\tRp 10.000");
-	printf("\n\t\t\t\t5. Pengkang\t\tRp 9.000");
+	printf("\n\t\t\t\t4. Iwak Pakasem\t\tRp 10.000");
+	printf("\n\t\t\t\t5. Kue Dange\t\tRp 9.000");
 	printf("\n\n\t\t\t\tB. Minuman :");
-	printf("\n\t\t\t\t6. Es Teler Pontianak\tRp 10.000");
+	printf("\n\t\t\t\t6. Es Tuak\tRp 10.000");
 	printf("\n\t\t\t\t7. Es Jagung\t\tRp 9.000");
 	printf("\n\t\t\t\t8. Cincau\t\tRp 8.000\n\n\n");
 		printf("\t\t\t\t Total Harga : Rp %d\n\n", total);
@@ -689,7 +702,7 @@ int food8(char username[50], int cash)
 		}
 		else if(option==2)
 		{
-			option=13000;
+			option=10000;
 		}
 		else if(option==3)
 		{
@@ -757,7 +770,7 @@ int food9(char username[50], int cash)
 	printf("\n\t\t\t\t1. Nasi Bekepor\t\tRp 17.000");
 	printf("\n\t\t\t\t2. Bingka Barandam\tRp 6.500");
 	printf("\n\t\t\t\t3. Sate Payau\t\tRp 5.000");
-	printf("\n\t\t\t\t4. Kalumpe\t\tRp 8.000");
+	printf("\n\t\t\t\t4. Ayam Cincane\t\tRp 8.000");
 	printf("\n\t\t\t\t5. Ketupat Kandangan\tRp 12.500");
 	printf("\n\n\t\t\t\tB. Minuman :");
 	printf("\n\t\t\t\t6. Ce Hun Tiaw\t\tRp 10.000");
@@ -840,7 +853,7 @@ int food10(char username[50], int cash)
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
 	printf("\n\t\t\t\t1. Coto Makassar\tRp 20.000");
-	printf("\n\t\t\t\t2. Nasi Jaha\t\tRp 12.500");
+	printf("\n\t\t\t\t2. Nasi Kuning Riburane\tRp 14.500");
 	printf("\n\t\t\t\t3. Lapa-lapa\t\tRp 7.000");
 	printf("\n\t\t\t\t4. Pallukacci\t\tRp 9.000");
 	printf("\n\t\t\t\t5. Burasa\t\tRp 12.000");
@@ -858,7 +871,7 @@ int food10(char username[50], int cash)
 		}
 		else if(option==2)
 		{
-			option=12500;
+			option=14500;
 		}
 		else if(option==3)
 		{
@@ -1007,11 +1020,11 @@ int food12(char username[50], int cash)
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
-	printf("\n\t\t\t\t1. Nasi Kuning Riburane\tRp 19.000");
+	printf("\n\t\t\t\t1. Nasi Jaha\t\tRp 18.000");
 	printf("\n\t\t\t\t2. Tinutuan\t\tRp 12.000");
-	printf("\n\t\t\t\t3. Kalppertaart\t\tRp 15.000");
-	printf("\n\t\t\t\t4. Panada\t\tRp 7.500");
-	printf("\n\t\t\t\t5. Halua Kenari\t\tRp 8.000");
+	printf("\n\t\t\t\t3. Woku Cakalang\tRp 14.000");
+	printf("\n\t\t\t\t4. Klappertaart\t\tRp 15.000");
+	printf("\n\t\t\t\t5. Panada\t\tRp 8.000");
 	printf("\n\n\t\t\t\tB. Minuman :");
 	printf("\n\t\t\t\t6. Es Tji Mei\t\tRp 5.000");
 	printf("\n\t\t\t\t7. Jus Patikala\t\tRp 10.000");
@@ -1021,7 +1034,7 @@ int food12(char username[50], int cash)
 		scanf("%d", &option);
 		if(option==1)
 		{
-			option=19000;
+			option=18000;
 
 		}
 		else if(option==2)
@@ -1030,11 +1043,11 @@ int food12(char username[50], int cash)
 		}
 		else if(option==3)
 		{
-			option=15000;
+			option=14000;
 		}
 		else if(option==4)
 		{
-			option=7500;
+			option=15000;
 		}
 		else if(option==5)
 		{
@@ -1327,15 +1340,6 @@ int food15(char username[50], int cash)
 	return total; //Harga Total
 }
 
-
-//TODO: Menghias Struk
-void struk(int price_food[50], int count[50], int size) {
-	int i;
-	for(i=0;i<size;i++) {
-		printf("\t\tHarga Makanan/Minuman\tBanyak\tHarga\n");
-		printf("\t\tNama Makanan/minuman\t%d\t%d", count[i], price_food[i]);
-	}
-}
 
 			
 
