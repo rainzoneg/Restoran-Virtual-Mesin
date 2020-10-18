@@ -337,27 +337,126 @@ char login(){
 }
 
 void refill() {
+	int mobileNumber = 0;
 	system("cls");
 	int a;
 	do{
 		printf("\n\t\t\t\t\t\t      User: %s", username);
 		printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
 		printf("\n\n\n");
-		printf("Masukan saldo Anda : ");
-		scanf("%d", &a);
-		if(a<5000)
-		{
-			printf("\nMaaf, Anda dapat mengisi saldo minimal 5000 rupiah\n\n");
-			fflush(stdin);
-			printf("Ketik apapun untuk mencoba lagi, atau ESC untuk kembali ke halaman utama");
-			switch(getch()){
-				case ESC:
-					menu();
-					break;
-				default:
+		printf("Pilih metode top up:\n\n");
+		printf("1. Mobile Credit\n");
+		printf("2. Minimart Voucher\n");
+		printf("3. Transfer E-money\n");
+		printf("4. Kembali ke menu\n");
+		printf("Masukan angka menu Anda: ");
+		switch(getch()){
+			case '1':
+				while(mobileNumber < 100){
 					system("cls");
-			}
+					printf("\n\t\t\t\t\t\t      User: %s", username);
+					printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+					printf("\n\n\n");
+					printf("Masukkan nomor mobile anda: ");
+					scanf("%d", &mobileNumber);
+					if(mobileNumber<100){
+						printf("\nMasukkan nomor yang valid! (minimal 3 angka)");
+					}
+					Sleep(1000);
+					fflush(stdin);
+				} 
+				mobileNumber = 0;
+				printf("Masukan saldo Anda : \n");
+				scanf("%d", &a);
+				if(a<5000)
+				{
+					printf("\nMaaf, Anda dapat mengisi saldo minimal 5000 rupiah\n\n");
+					fflush(stdin);
+					printf("Ketik apapun untuk mencoba lagi, atau ESC untuk kembali ke halaman utama");
+					switch(getch()){
+						case ESC:
+							menu();
+							break;
+						default:
+							system("cls");
+					}
+				}
+				break;
+			case '2':
+				system("cls");
+				printf("\n\t\t\t\t\t\t      User: %s", username);
+				printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+				printf("\n\n\n");
+				printf("Pilihlah voucher saldo yang ingin dibeli:\n");
+				printf("1. Rp10.000,00\n");
+				printf("2. Rp20.000,00\n");
+				printf("3. Rp50.000,00\n");
+				printf("4. Kembali\n"); 
+				printf("Masukan pilihan Anda: ");
+				switch(getch()){
+					case '1':
+						printf("\nKonfirmasikan transaksi di kasir minimart.");
+						Sleep(400);
+						printf(".");
+						Sleep(400);
+						printf(".");
+						Sleep(500);
+						a = 10000;
+						break;
+					case '2':
+						printf("\nKonfirmasikan transaksi di kasir minimart.");
+						Sleep(400);
+						printf(".");
+						Sleep(400);
+						printf(".");
+						Sleep(500);
+						a = 20000;
+						break;
+					case '3':
+						printf("\nKonfirmasikan transaksi di kasir minimart.");
+						Sleep(400);
+						printf(".");
+						Sleep(400);
+						printf(".");
+						Sleep(500);
+						a = 50000;
+						break;
+					default:
+						printf ("\n\nInput salah !\n");
+						printf ("Masukan angka menu dengan benar.\n");
+						system("pause");
+						refill();
+				}
+				break;
+			case '3':
+				system("cls");
+				printf("\n\t\t\t\t\t\t      User: %s", username);
+				printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+				printf("\n\n\n");
+				printf("Masukan saldo Anda : \n");
+				scanf("%d", &a);
+				if(a<5000)
+				{
+					printf("\nMaaf, Anda dapat mengisi saldo minimal 5000 rupiah\n\n");
+					fflush(stdin);
+					printf("Ketik apapun untuk mencoba lagi, atau ESC untuk kembali ke halaman utama");
+					switch(getch()){
+						case ESC:
+							menu();
+							break;
+						default:
+							system("cls");
+					}
 			
+				}
+				break;
+			case '4':
+				menu();
+			default:
+				printf ("\n\nInput salah !\n");
+				printf ("Masukan angka menu dengan benar.\n");
+				system("pause");
+				refill();
 		}
 	} while(a<5000);
 	cash+=a;
