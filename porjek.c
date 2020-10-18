@@ -108,39 +108,39 @@ char pesan()
 	printf("\n\t\t\t\t9. Tepian Pandan Tenggarong\n\n\n");
 	switch(getch()){
 		case '1':
-			x=0;
+			x=1;
 			price=food1(username, cash);
 			break;
 		case '2':
-			x=0;
+			x=1;
 			price=food2(username, cash);
 			break;
 		case '3':
-			x=0;
+			x=1;
 			price=food3(username, cash);
 			break;
 		case '4':
-			x=1;
+			x=2;
 			price=food4(username, cash);
 			break;
 		case '5':
-			x=1;
+			x=2;
 			price=food5(username, cash);
 			break;
 		case '6':
-			x=1;
+			x=2;
 			price=food6(username, cash);
 			break;
 		case '7':
-			x=2;
+			x=3;
 			price=food7(username, cash);
 			break;
 		case '8':
-			x=2;
+			x=3;
 			price=food8(username, cash);
 			break;
 		case '9':
-			x=2;
+			x=3;
 			price=food9(username, cash);
 			break;
 		case ESC:
@@ -163,27 +163,27 @@ char pesan()
 			printf("\n\t\t\t\t6. Kitong Papua Resto\n\n\n");
 			switch(getch()){
 			case '1':
-				x=3;
+				x=4;
 				price=food10(username, cash);
 				break;
 			case '2':
-				x=3;
+				x=4;
 				price=food11(username, cash);			
 				break;
 			case '3':
-				x=3;
+				x=4;
 				price=food12(username, cash);
 				break;
 			case '4':
-				x=4;
+				x=5;
 				price=food13(username, cash);			
 				break;
 			case '5':
-				x=4;
+				x=5;
 				price=food14(username, cash);			
 				break;
 			case '6':
-				x=4;
+				x=5;
 				price=food15(username, cash);			
 				break;
 			case '0':
@@ -206,9 +206,45 @@ char pesan()
 			return pesan();
 	}
 	
+	void address() {
+		system("cls");
+		system("color 30");
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n\t\t\t\tMasukan Alamat Pulau Besar Anda!\n\t\t\t  ");
+		printf("\n\t\t\t\t1. Jawa");
+		printf("\n\t\t\t\t2. Sumatera");
+		printf("\n\t\t\t\t3. Kalimantan");
+		printf("\n\t\t\t\t4. Sulawesi");
+		printf("\n\t\t\t\t5. Papua\n\n\n");		
+		printf("\t\t\t\tAlamat Pulau Anda: ");
+		scanf("%d", &y);
+	}
 	
-	printf("%d", x);
-	printf("\nKetik apapun untuk kembali...");
+	address();
+	char check;
+	
+	price+=distance(x, y);
+
+	do {	
+		struk(username, cash);
+		printf("\n\n\t\t\t\tHarga Ongkos\t\t\tRp %d", distance(x, y));
+		printf("\n\n\t\t\t\tTOTAL\t\t\t\tRp %d", price);
+		printf("\n\n\t\t\t\tApakah Anda ingin melanjutkan pembayaran: (y/n) ");
+		scanf(" %c", &check);
+		if(cash-price<0) {
+			printf("\t\t\t\tSaldo Anda Tidak Cukup !");
+			printf("\n\t\t\t\tHarap isi saldo Anda: (y/n) ");
+			scanf(" %c", &check);
+			if(check=='y') {
+				refill();
+			}
+		}
+	} while(check =='n' || cash-price<0);
+	size=0;
+	cash-=price;
+	
+	printf("\nPesanan Sampai");
 	Sleep(400);
 	getch();
 }
