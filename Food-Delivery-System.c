@@ -252,8 +252,9 @@ char pesan()
 				Sleep(1000);
 				break;
 			default:
-				printf ("Input salah !\n");
-				printf ("Masukan angka menu dengan benar.\n");
+				printf ("\n\t\t\t\tInput salah !\n");
+				printf ("\t\t\t\tMasukan angka menu dengan benar.\n");
+				printf("\t\t\t\t");
 				system("pause");
 				return address();
 				
@@ -265,7 +266,7 @@ char pesan()
 	fflush(stdin);
 	printf("\n\t\t\t\tTekan tombol apapun untuk melanjutkan...");
 	getch();
-	/*Menentukan alamat user 2*/
+	/*Menentukan alamat user bagian 2*/
 	printf("\n\n\t\t\t\tAlamat lokasi tujuan anda: ");
 	fgets(alamatTujuan, 100, stdin);
 	Sleep(500);
