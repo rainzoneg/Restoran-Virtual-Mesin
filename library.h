@@ -147,7 +147,7 @@ int food1(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -238,7 +238,7 @@ int food2(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	return total; //Harga Total
@@ -326,7 +326,7 @@ int food3(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -415,7 +415,7 @@ int food4(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -504,7 +504,7 @@ int food5(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -593,7 +593,7 @@ int food6(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -682,7 +682,7 @@ int food7(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -771,7 +771,7 @@ int food8(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -860,7 +860,7 @@ int food9(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -949,7 +949,7 @@ int food10(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -1038,7 +1038,7 @@ int food11(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -1127,7 +1127,7 @@ int food12(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -1216,7 +1216,7 @@ int food13(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -1305,7 +1305,7 @@ int food14(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -1394,7 +1394,7 @@ int food15(char username[50], int cash)
 		total+=price_food[size];
 		size++;
 			
-		printf("\n\t\t\t\t Adakah anda ingin memesan: (y/n) ");
+		printf("\n\t\t\t\t Adakah anda ingin memesan lagi: (y/n) ");
 		scanf(" %c", &check);
 	} while(check == 'y');
 	
@@ -1402,13 +1402,14 @@ int food15(char username[50], int cash)
 }
 
 
-void struk(username, cash) {
+void struk(username, cash, alamatTujuan) {
 	int i;
 	system("cls");
 	printf("\n    User: %s", username);
 	printf("\n    Saldo: Rp %d", cash);
 	printf("\n\n\n\n\n\t\t\t\t========================================\n");
 	printf("\t\t\t\t\tStruk Bukti Pembayaran\n\t\t\t  ");	
+	printf("\n\t\t\t\tAlamat Tujuan: %s", alamatTujuan);
 	printf("\n\n\t\t\t\tNama Makanan/Minuman\tPorsi\tHarga\n");
 	for(i=0;i<size;i++) {
 		printf("\n\t\t\t\t%s%d\tRp %d", name_food+i, count[i], price_food[i]);

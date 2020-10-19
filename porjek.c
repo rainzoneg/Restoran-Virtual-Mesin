@@ -14,14 +14,14 @@ char menu();
 char pesan();
 char pesan1();
 char login();
-void help();
-void refill();
+void helpMenu();
+char refillMenu();
 
 int main(){
 	fflush(stdin);
 	system("cls");
 	system("color F0");
-	/*Sign-Up*/
+	/*Sign-Up Akun User*/
 	printf("\n\n\n\n\n\n\n\n");
 	printf("\t\t\t\t\t\t\tSign-Up\n\n\n");
 	printf("\t\t\t\t\tNama anda:    ");
@@ -38,12 +38,13 @@ int main(){
 		Sleep(1000);
 		return main();
 	}
-	/*Login*/
+	/*Login Akun User*/
 	login();
 }
 
 
 char menu(){
+	/*Fungsi modular untuk main menu program*/
 	fflush(stdin);
 	system("cls");
 	system("color AF");
@@ -63,19 +64,21 @@ char menu(){
 			return menu();
 			break;
 		case '2':
-			refill();
+			refillMenu();
 			return menu();
 			break;
 		case '3':
-			help();
+			helpMenu();
 			return menu();
 			break;
 		case '4':
+			/*Ketika logout, maka dikeluarkan dari menu dan kembali ke menu login*/
 			login();
 			break;
 		case '5':
 			system("cls");
-			printf ("Terima kasih telah mencoba !\n");
+			printf ("\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\tTerima kasih telah mencoba !\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+			Sleep(500);
 			exit(0);
 		default:
 			printf ("Input salah !\n");
@@ -87,11 +90,14 @@ char menu(){
 
 char pesan()
 {
+	/*Fungsi yang menangani proses pemesanan makanan/minuman dari restoran*/
 	fflush(stdin);
+	size = 0;
 	char restoran[100];
 	int x;
 	int y;
 	int price;
+	char alamatTujuan[50];
 	system("cls");
 	system("color 30");
 	printf("\n    User: %s", username);
@@ -211,23 +217,76 @@ char pesan()
 		system("color 30");
 		printf("\n    User: %s", username);
 		printf("\n    Saldo: Rp %d", cash);
+		/*Menentukan alamat user 1*/
 		printf("\n\n\n\n\n\t\t\t\tMasukan Alamat Pulau Besar Anda!\n\t\t\t  ");
 		printf("\n\t\t\t\t1. Jawa");
 		printf("\n\t\t\t\t2. Sumatera");
 		printf("\n\t\t\t\t3. Kalimantan");
 		printf("\n\t\t\t\t4. Sulawesi");
-		printf("\n\t\t\t\t5. Papua\n\n\n");		
-		printf("\t\t\t\tAlamat Pulau Anda: ");
-		scanf("%d", &y);
+		printf("\n\t\t\t\t5. Papua\n\n");	
+		printf("\t\t\t\tMasukan pilihan Anda: ");	
+		switch(getch()){
+			case '1':
+				y = 1;
+				printf("\n\t\t\t\tPulau = Jawa");
+				Sleep(1000);
+				break;
+			case '2':
+				y = 2;
+				printf("\n\t\t\t\tPulau = Sumatera");
+				Sleep(1000);
+				break;
+			case '3':
+				y = 3;
+				printf("\n\t\t\t\tPulau = Kalimantan");
+				Sleep(1000);
+				break;
+			case '4':
+				y = 4;
+				printf("\n\t\t\t\tPulau = Sulawesi");
+				Sleep(1000);
+				break;
+			case '5':
+				y = 5;
+				printf("\n\t\t\t\tPulau = Papua");
+				Sleep(1000);
+				break;
+			default:
+				printf ("Input salah !\n");
+				printf ("Masukan angka menu dengan benar.\n");
+				system("pause");
+				return address();
+				
+		}
+		
 	}
-	
 	address();
+	Sleep(1000);
+	fflush(stdin);
+	printf("\n\t\t\t\tTekan tombol apapun untuk melanjutkan...");
+	getch();
+	/*Menentukan alamat user 2*/
+	printf("\n\n\t\t\t\tAlamat lokasi tujuan anda: ");
+	fgets(alamatTujuan, 100, stdin);
+	Sleep(500);
+	system("cls");
+	system("color 30");
+	printf("\n    User: %s", username);
+	printf("\n    Saldo: Rp %d", cash);
+	printf("\n\n\n\n\n\n\t\t\t\t\t    Pesanan sedang dikonfirmasi.");
+	Sleep(400);
+	printf(".");
+	Sleep(400);
+	printf(".");
+	Sleep(500);
 	char check;
 	
 	price+=distance(x, y);
 
+	/*Mencetak struk pemesanan sebelum dilakukan transaksi. Jika saldo belum mencukupi, diarahkan ke menu top up saldo*/
 	do {	
-		struk(username, cash);
+		struk(username, cash, alamatTujuan);
+		
 		printf("\n\n\t\t\t\tHarga Ongkos\t\t\tRp %d", distance(x, y));
 		printf("\n\n\t\t\t\tTOTAL\t\t\t\tRp %d", price);
 		printf("\n\n\t\t\t\tApakah Anda ingin melanjutkan pembayaran: (y/n) ");
@@ -237,40 +296,39 @@ char pesan()
 			printf("\n\t\t\t\tHarap isi saldo Anda: (y/n) ");
 			scanf(" %c", &check);
 			if(check=='y') {
-				refill();
+				refillMenu();
 			}
 		}
 	} while(check =='n' || cash-price<0);
 	size=0;
 	cash-=price;
-	
-	printf("\nPesanan Sampai");
+	system("cls");
+	system("color 30");
+	printf("\n    User: %s", username);
+	printf("\n    Saldo: Rp %d", cash);
+	printf("\n\n\n\n\n\n\t\t\t\t\t\tPesanan sedang dikonfirmasi.");
+	Sleep(400);
+	printf(".");
+	Sleep(400);
+	printf(".");
+	Sleep(500);
+	printf("\n\t\t\t\t\t\tPesanan sedang diantar.");
+	Sleep(400);
+	printf(".");
+	Sleep(400);
+	printf(".");
+	Sleep(500);
+	system("cls");
+	system("color 30");
+	printf("\n    User: %s", username);
+	printf("\n    Saldo: Rp %d", cash);
+	printf("\n\n\n\n\n\n\t\t\t\t\t\tPesanan Sampai!");
 	Sleep(400);
 	getch();
 }
 
 
-	
-//	printf("\n\n\n\n\n\t\t\t\tMasukan restoran yang ingin anda pesan!\n\n\n\t\t\t  ");
-//	scanf("\n\n\n\n\n\t\t\t\t %d", &x);
-//	printf("\n\n\n\n\n\t\t\t\tMasukan Alamat Anda!\n\n\n\t\t\t  ");
-//	scanf("\n\n\n\n\n\t\t\t\t %d", &y);
-//	printf("\n\n\n\n\n\t\t\t\tMasukan Harga\n\n\n\t\t\t  ");
-//	scanf("\n\n\n\n\n\t\t\t\t %d", &price);
-	
-	
-	
-//	printf("Harga Ongkos: %d", distance(x, y, price));
-//	printf("Harga Total: %d", price+=distance(x, y, price));
-	
-//	fgets(restoran, 100, stdin);
-//	printf("\nRestoran yang ingin anda kunjungi adalah: %s", restoran);
-//	printf("\nKetik apapun untuk kembali...");
-//	Sleep(400);
-//	getch();
-//}
-
-void help(){
+void helpMenu(){
 	system("cls");
 	system("color AF");
 	printf("\n    User: %s", username);
@@ -294,6 +352,7 @@ void help(){
 }
 
 char login(){
+	/*Fungsi untuk login user*/
 	int x,y;
 	int n = 1;
 	char unLogin[50], pwLogin[50];
@@ -310,9 +369,9 @@ char login(){
 		fgets(unLogin, 50, stdin);
 		printf("\t\t\t\t\tPassword:    ");
 		fgets(pwLogin, 50, stdin);
+		/*Pengecekkan informasi login user dengan membandingkan string login dengan string dari sign-up (yang adalah global variable)*/
 		x = strcmp(unLogin, username);
 		y = strcmp(pwLogin, password);
-		
 		if(x==0 && y==0){
 			break;
 		}
@@ -333,17 +392,22 @@ char login(){
 	Sleep(400);
 	printf(".");
 	Sleep(500);
+	/*Setelah login berhasil, lanjut ke main menu*/
 	menu();
 }
 
-void refill() {
+char refillMenu() {
+	/*Fungsi untuk menangani refill/top-up saldo user*/
 	int mobileNumber = 0;
 	system("cls");
-	int a;
+	system("color AF");
+	int a = 0;
+	int loopCheck = 0;
 	do{
 		printf("\n\t\t\t\t\t\t      User: %s", username);
 		printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
 		printf("\n\n\n");
+		/*3 Metode top-up:*/
 		printf("Pilih metode top up:\n\n");
 		printf("1. Mobile Credit\n");
 		printf("2. Minimart Voucher\n");
@@ -352,33 +416,44 @@ void refill() {
 		printf("Masukan angka menu Anda: ");
 		switch(getch()){
 			case '1':
-				while(mobileNumber < 100){
+				while(mobileNumber < 100000)
+				{
 					system("cls");
 					printf("\n\t\t\t\t\t\t      User: %s", username);
 					printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
 					printf("\n\n\n");
 					printf("Masukkan nomor mobile anda: ");
 					scanf("%d", &mobileNumber);
-					if(mobileNumber<100){
-						printf("\nMasukkan nomor yang valid! (minimal 3 angka)");
+					if(mobileNumber<100000){
+						printf("\nMasukkan nomor yang valid! (minimal 6 angka)");
 					}
 					Sleep(1000);
 					fflush(stdin);
 				} 
 				mobileNumber = 0;
-				printf("Masukan saldo Anda : \n");
-				scanf("%d", &a);
-				if(a<5000)
+				;
+				while(loopCheck<1)
 				{
-					printf("\nMaaf, Anda dapat mengisi saldo minimal 5000 rupiah\n\n");
-					fflush(stdin);
-					printf("Ketik apapun untuk mencoba lagi, atau ESC untuk kembali ke halaman utama");
-					switch(getch()){
-						case ESC:
-							menu();
-							break;
-						default:
-							system("cls");
+					system("cls");
+					printf("\n\t\t\t\t\t\t      User: %s", username);
+					printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+					printf("\n\n\n");
+					printf("Masukan saldo Anda : \n");
+					scanf("%d", &a);
+					if(a<5000){
+						printf("\nMaaf, Anda dapat mengisi saldo minimal 5000 rupiah\n\n");
+						fflush(stdin);
+						printf("Ketik apapun untuk mencoba lagi, atau ESC untuk mencoba metode lain");
+						switch(getch()){
+							case ESC:
+								return refillMenu();
+								break;
+							default:
+								system("cls");
+						}
+					}	
+					else{
+						loopCheck = 1;
 					}
 				}
 				break;
@@ -421,11 +496,14 @@ void refill() {
 						Sleep(500);
 						a = 50000;
 						break;
+					case '4':
+						return refillMenu();
+						break;
 					default:
 						printf ("\n\nInput salah !\n");
 						printf ("Masukan angka menu dengan benar.\n");
 						system("pause");
-						refill();
+						return refillMenu();
 				}
 				break;
 			case '3':
@@ -439,10 +517,10 @@ void refill() {
 				{
 					printf("\nMaaf, Anda dapat mengisi saldo minimal 5000 rupiah\n\n");
 					fflush(stdin);
-					printf("Ketik apapun untuk mencoba lagi, atau ESC untuk kembali ke halaman utama");
+					printf("Ketik apapun untuk mencoba lagi, atau ESC untuk mencoba ke metode lain");
 					switch(getch()){
 						case ESC:
-							menu();
+							return refillMenu();
 							break;
 						default:
 							system("cls");
@@ -456,7 +534,7 @@ void refill() {
 				printf ("\n\nInput salah !\n");
 				printf ("Masukan angka menu dengan benar.\n");
 				system("pause");
-				refill();
+				return refillMenu();
 		}
 	} while(a<5000);
 	cash+=a;
@@ -474,5 +552,6 @@ void refill() {
 	Sleep(400);
 	printf("\n\nKetik apapun untuk kembali...");
 	getch();
+	
 	
 }
