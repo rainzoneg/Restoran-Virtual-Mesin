@@ -10,6 +10,7 @@
 char username[50];
 char password[50];
 int cash;
+int process;
 char menu();
 char pesan();
 char pesan1();
@@ -104,14 +105,14 @@ char pesan()
 	printf("\n    Saldo: Rp %d", cash);
 	printf("\n\n\n\n\t\t\t\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
 	printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
-	printf("\n\n\t\t\t\tA. Pulau Jawa\t\t\t\tB. Pulau Sumatera");
-	printf("\n\t\t\t\t1. Koeno Koeni Resto\t\t\t4. Rumah Makan Simpang Raya");
-	printf("\n\t\t\t\t2. Oseng Mercon Bu Narti Malioboro\t5. Nasi Kapau Uni Liis");
-	printf("\n\t\t\t\t3. RM Sari Rasa\t\t\t\t6. Bundo Kanduang");
-	printf("\n\n\t\t\t\tC. Pulau Kalimantan");
-	printf("\n\t\t\t\t7. Kuin Abdhu Gunung Sari");
+	printf("\n\n\t\t\t\tA. Jakarta Pusat\t\t\tB. Jakarta Barat");
+	printf("\n\t\t\t\t1. Koeno Koeni Cafe\t\t\t4. Rumah Makan Kebon Jeruk");
+	printf("\n\t\t\t\t2. Oseng Mercon Bu Ani Samanhudi\t5. Nasi Kapau Uni Liis");
+	printf("\n\t\t\t\t3. RM Sari Rasa Kebon Kacang\t\t6. Bundo Kanduang Mangga Besar");
+	printf("\n\n\t\t\t\tC. Jakarta Utara");
+	printf("\n\t\t\t\t7. Nasi Sariasa Sawah Besar");
 	printf("\n\t\t\t\t8. Rumah Makan Tjilik Riwut ");
-	printf("\n\t\t\t\t9. Tepian Pandan Tenggarong\n\n\n");
+	printf("\n\t\t\t\t9. Telaga Sampireun Ancol\n\n\n");
 	switch(getch()){
 		case '1':
 			x=1;
@@ -159,14 +160,14 @@ char pesan()
 			printf("\n\n\n\n\n\t\t\t\tMasukan restoran yang ingin anda pesan!\n\t\t\t  ");
 			printf("\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
 			printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
-			printf("\n\n\t\t\t\tD. Pulau Sulawesi");
-			printf("\n\t\t\t\t1. Coto Nusantara");
+			printf("\n\n\t\t\t\tD. Jakarta Timur");
+			printf("\n\t\t\t\t1. Coto Nusantara Cipinang");
 			printf("\n\t\t\t\t2. Konro Karebosi");
 			printf("\n\t\t\t\t3. Pondok Raya Minahasa");
-			printf("\n\n\t\t\t\tE. Pulau Papua");
-			printf("\n\t\t\t\t4. Resto Apung Tomarokai");
-			printf("\n\t\t\t\t5. Yougwa Danau Sentani");
-			printf("\n\t\t\t\t6. Kitong Papua Resto\n\n\n");
+			printf("\n\n\t\t\t\tE. Jakarta Selatan");
+			printf("\n\t\t\t\t4. Ampera Garden Food Festival");
+			printf("\n\t\t\t\t5. Pusat Kuliner Kalibata");
+			printf("\n\t\t\t\t6. Kitong Serasa Resto\n\n\n");
 			switch(getch()){
 			case '1':
 				x=4;
@@ -218,37 +219,37 @@ char pesan()
 		printf("\n    User: %s", username);
 		printf("\n    Saldo: Rp %d", cash);
 		/*Menentukan alamat user 1*/
-		printf("\n\n\n\n\n\t\t\t\tMasukan Alamat Pulau Besar Anda!\n\t\t\t  ");
-		printf("\n\t\t\t\t1. Jawa");
-		printf("\n\t\t\t\t2. Sumatera");
-		printf("\n\t\t\t\t3. Kalimantan");
-		printf("\n\t\t\t\t4. Sulawesi");
-		printf("\n\t\t\t\t5. Papua\n\n");	
+		printf("\n\n\n\n\n\t\t\t\tMasukan Alamat Domisili Anda!\n\t\t\t  ");
+		printf("\n\t\t\t\t1. Jakarta Pusat");
+		printf("\n\t\t\t\t2. Jakarta Barat");
+		printf("\n\t\t\t\t3. Jakarta Utara");
+		printf("\n\t\t\t\t4. Jakarta Timur");
+		printf("\n\t\t\t\t5. Jakarta Selatan\n\n");	
 		printf("\t\t\t\tMasukan pilihan Anda: ");	
 		switch(getch()){
 			case '1':
 				y = 1;
-				printf("\n\t\t\t\tPulau = Jawa");
+				printf("\n\t\t\t\tDomisili = Jakarta Pusat");
 				Sleep(1000);
 				break;
 			case '2':
 				y = 2;
-				printf("\n\t\t\t\tPulau = Sumatera");
+				printf("\n\t\t\t\tDomisili = Jakarta Barat");
 				Sleep(1000);
 				break;
 			case '3':
 				y = 3;
-				printf("\n\t\t\t\tPulau = Kalimantan");
+				printf("\n\t\t\t\tDomisili = Jakarta Utara");
 				Sleep(1000);
 				break;
 			case '4':
 				y = 4;
-				printf("\n\t\t\t\tPulau = Sulawesi");
+				printf("\n\t\t\t\tDomisili = Jakarta Timur");
 				Sleep(1000);
 				break;
 			case '5':
 				y = 5;
-				printf("\n\t\t\t\tPulau = Papua");
+				printf("\n\t\t\t\tDomisili = Jakarta Selatan");
 				Sleep(1000);
 				break;
 			default:
@@ -281,6 +282,7 @@ char pesan()
 	printf(".");
 	Sleep(500);
 	char check;
+	process = 1;
 	
 	price+=distance(x, y);
 
@@ -301,6 +303,7 @@ char pesan()
 			}
 		}
 	} while(check =='n' || cash-price<0);
+	/* Pengecekan looping untuk mengecek apakah saldo sudah cukup untuk membayar pesanan atau belum*/
 	size=0;
 	cash-=price;
 	system("cls");
@@ -324,6 +327,7 @@ char pesan()
 	printf("\n    User: %s", username);
 	printf("\n    Saldo: Rp %d", cash);
 	printf("\n\n\n\n\n\n\t\t\t\t\t\tPesanan Sampai!");
+	process = 0;
 	Sleep(400);
 	getch();
 }
@@ -413,7 +417,9 @@ char refillMenu() {
 		printf("1. Mobile Credit\n");
 		printf("2. Minimart Voucher\n");
 		printf("3. Transfer E-money\n");
-		printf("4. Kembali ke menu\n");
+		if(process==0){
+			printf("4. Kembali ke menu\n");	
+		}
 		printf("Masukan angka menu Anda: ");
 		switch(getch()){
 			case '1':
@@ -530,7 +536,9 @@ char refillMenu() {
 				}
 				break;
 			case '4':
-				menu();
+				if(process==0){
+					menu();
+				}
 			default:
 				printf ("\n\nInput salah !\n");
 				printf ("Masukan angka menu dengan benar.\n");

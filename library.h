@@ -6,11 +6,11 @@ int size; //Isi array
 
 int distance(int restaurant, int location) 
 {
-//	jawa = 1;
-//	sumatera = 2;
-//	kalimantan = 3;
-//	sulawesi =4;
-//	papua = 5;
+//	jakpus = 1;
+//	jakbar = 2;
+//	jakut = 3;
+//	jaktim =4;
+//	jaksel = 5;
 
 	if (restaurant==location) 
 	{
@@ -1154,7 +1154,7 @@ int food13(char username[50], int cash)
 	printf("\n\t\t\t\t4. Sate Ulat Sagu\tRp 6.000");
 	printf("\n\t\t\t\t5. Kue Bagea\t\tRp 7.000");
 	printf("\n\n\t\t\t\tB. Minuman :");
-	printf("\n\t\t\t\t6. Sunset Papua\t\tRp 12.000");
+	printf("\n\t\t\t\t6. Sunset Orange\t\tRp 12.000");
 	printf("\n\t\t\t\t7. Es Matoa\t\tRp 10.000");
 	printf("\n\t\t\t\t8. Kopi Senang\t\tRp 8.000\n\n\n");
 		printf("\t\t\t\t Total Harga : Rp %d\n\n", total);
