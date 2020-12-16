@@ -1,18 +1,18 @@
-<img src="https://miro.medium.com/max/1000/0*RHHxKod5FoRBI8Fk.png" align="right" width="130" height="130"  s />
+<img src="https://cdn4.iconfinder.com/data/icons/restaurant-service-3/64/cashier-restaurant-shop-store-department-payment-shopping-512.png" align="right" width="130" height="130"  s />
 
-# Food-Delivery-System ![language](https://img.shields.io/badge/language-C-orange)
-> A simple, online food delivery program 
+# Restoran-Virtual-Mesin ![language](https://img.shields.io/badge/language-C-orange)
+> A simple, online menu ordering system for restaurants
 
-Program ini bertujuan untuk membantu user dalam memesan makanan secara jarak jauh. Halaman pertama, ada menu login di mana user memasukkan username dan password.
-User dapat mengisi saldo, memilih restoran, serta menu makanan dan minuman. User juga dapat menentukan lokasi alamat rumah.
-Di akhir program, terdapat struk pembayaran sebagai bukti pembayaran dan pesanan telah sampai.
+Pada program kami buat bertujuan untuk membantu user memesan makanan/minuman user di tempat tanpa kasir. Program ini mempunyai fitur:
 
 
-## Usage
+## Features
 
-```bash
-coming soon
-```
+• Mendaftar akun(di mana user juga tidak perlu mendaftar namun tidak mendapat benefit berupa voucher diskon pembelian)
+• Mengisi saldo (untuk user belum mendaftar akun hanya cash saja, sedangkan user mendaftar akun bisa membayar dengan mengisi saldo e-money melalui bank/voucher)
+• Fitur memesan makanan (makanan main course/minuman),
+• fitur hapus jika user salah memilih makanan, 
+• Semua perhitungan total pembayaran dan pajak dilakukan secara otomatis, dan ditampilkan dalam bentuk bon. Bon sebagai output teks yang ditampilkan kepada user sebagai riwayat transaksi akan disimpan dalam file yang yang dapat ditentukan nama filenya.
 
 ## Authors and acknowledgment
 
@@ -23,7 +23,7 @@ Juan Patrick (1906355516)
 Samuel Nathaniel Halim (1906355560)
 
 Lecturer's comment:	
-Topik Ok, silakan dilanjutkan.
+
 
 Lecturers:
 
