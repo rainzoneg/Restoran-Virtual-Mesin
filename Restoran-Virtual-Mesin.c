@@ -7,14 +7,18 @@
 #include "library.h"
 #define ESC 27
 
-char username[50];
-char password[50];
+
+char username[100];
+char password[100];
+char filename[50] = "account.txt";
 int cash;
 int process;
 char menu();
 char pesan();
 char pesan1();
 char login();
+char signup();
+int checkUseAccount;
 void helpMenu();
 char refillMenu();
 
@@ -22,36 +26,54 @@ int main(){
 	fflush(stdin);
 	system("cls");
 	system("color F0");
-	/*Sign-Up Akun User*/
 	printf("\n\n\n\n\n\n\n\n");
-	printf("\t\t\t\t\t\t\tSign-Up\n\n\n");
-	printf("\t\t\t\t\tNama anda:    ");
-	fgets(username, 50, stdin);
-	while(username[0]=='\n'){
-		printf("\n\t\t\t\t\tNama tidak boleh kosong");
-		Sleep(1000);
-		return main();
+	printf("\t\t\t\t\t Apakah anda ingin masuk menggunakan akun?\n\n\n");
+	printf("\t\t\t\t\t\t1.Ya, akses dengan akun\n\n");
+	printf("\t\t\t\t\t\t2.Tidak, akses tanpa akun.\n\n");
+	switch(getch()){
+		case '1':
+			system("cls");
+			system("color F0");
+			printf("\n\n\n\n\n\n\n\n");
+			printf("\t\t\t\t\t\tSign-Up / Login Akun\n\n\n");
+			printf("\t\t\t\t\t\t1.Login\n\n");
+			printf("\t\t\t\t\t\t2.Sign-up akun baru.\n\n");
+			switch(getch()){
+				case '1':
+					login();
+					break;
+				case '2':
+					signup();
+					login();
+					break;
+				default:
+					printf("Input invalid!");
+					return main();
+			}
+			break;
+		case '2':
+			checkUseAccount = 0;
+			menu();
+			break;
+		default:
+			printf("Input invalid!");
+			return main();
 	}
-	printf("\t\t\t\t\tPassword anda:    ");
-	fgets(password, 50, stdin);
-	while(password[0]=='\n'){
-		printf("\n\t\t\t\t\tPassword tidak boleh kosong");
-		Sleep(1000);
-		return main();
-	}
-	/*Login Akun User*/
-	login();
 }
-
 
 char menu(){
 	/*Fungsi modular untuk main menu program*/
 	fflush(stdin);
 	system("cls");
 	system("color AF");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
-	printf("\n\n\n\n\n");
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
+	else{
+		printf("\n\n\n\n\n\n\n");
+	}
 	printf("\t\t\t\t\t Program Mememesan Makanan\n\n\n");
 	printf("\t\t\t\t\t\t1.Pesan Makanan!\n\n");
 	printf("\t\t\t\t\t\t2.Isi Saldo\n\n");
@@ -360,7 +382,10 @@ char login(){
 	/*Fungsi untuk login user*/
 	int x,y;
 	int n = 1;
-	char unLogin[50], pwLogin[50];
+	int notFound = 0;
+	char unLogin[100], pwLogin[100];
+	char line[128];
+	FILE *fPtr;
 	
 	do{
 		fflush(stdin);
@@ -369,26 +394,44 @@ char login(){
 		printf("\n\n\n\n\n\n\n\n");
 		printf("\t\t\t\t\t\t\tLogin \n");
 		printf("\t\t\t\t\t     (space and case-sensitive!) \n\n\n");
-		
 		printf("\t\t\t\t\tNama:    ");
-		fgets(unLogin, 50, stdin);
+		fgets(unLogin, 100, stdin);
+		unLogin[strcspn(unLogin, "\n")] = 0;
 		printf("\t\t\t\t\tPassword:    ");
-		fgets(pwLogin, 50, stdin);
-		/*Pengecekkan informasi login user dengan membandingkan string login dengan string dari sign-up (yang adalah global variable)*/
-		x = strcmp(unLogin, username);
-		y = strcmp(pwLogin, password);
-		if(x==0 && y==0){
-			break;
-		}
-		else{
-			printf("\n\t\t\t\tNama atau password tidak sesuai! ");
-			printf("Coba lagi.");
-			Sleep(1000);
-			
-		}
-		
-	}while(n=1);
-	
+		fgets(pwLogin, 100, stdin);
+		pwLogin[strcspn(pwLogin, "\n")] = 0;
+		/*Pengecekkan informasi login user dengan membandingkan string login dengan string dari database accounts (account.txt)*/
+		fPtr = fopen(filename, "r");
+		if (fPtr)
+		{
+		    while(fgets(line, sizeof(line), fPtr))
+		    {
+		    	line[strcspn(line, "\n")] = 0;
+		    	if(sscanf(line, "Username:%99s Password:%99s", username, password) == 2){
+		    		x = strcmp(unLogin, username);
+			    	y = strcmp(pwLogin, password);
+			        if (x == 0 && y == 0) {
+	                    printf("\n\t\t\t\t\t>>>User dan password terverifikasi!<<<\n");
+	                    notFound = 0;
+	                    n = 0;
+						break;
+	                }
+	                else {
+	                	notFound = 1;
+	                    continue;
+	                }    
+				}
+		    }
+		    if(notFound == 1){
+		    	printf("\n\t\t\t\t\t>>>User dan password tidak ditemukan!<<<\n");
+		    	Sleep(100);
+		    	printf("\n\t\t\t\t\t>>>Silahkan coba lagi.<<<\n");
+		    	getch();
+			}
+		    fclose(fPtr);
+		}	
+	}while(n==1);
+	checkUseAccount = 1;
 	printf("\n\t\t\t\t\tSelamat datang, %s", username);
 	Sleep(200);
 	printf("\n\t\t\t\t\tPlease wait.");
@@ -399,6 +442,48 @@ char login(){
 	Sleep(500);
 	/*Setelah login berhasil, lanjut ke main menu*/
 	menu();
+}
+
+char signup(){
+	fflush(stdin);
+	char texting[100];	
+	FILE *fPtr;
+		
+	system("cls");
+	system("color F0");
+	sprintf(texting, "%s", filename);
+	fPtr = fopen(texting, "a");
+	
+	if(fPtr == NULL){
+		printf("File tidak ditemukkan! Invalid!");
+		exit(EXIT_FAILURE);
+	}
+	
+	/*Sign-Up Akun User*/
+	printf("\n\n\n\n\n\n\n\n");
+	printf("\t\t\t\t\t\t\tSign-Up\n\n\n");
+	
+	printf("\t\t\t\t\tNama anda:    ");
+	fgets(username, sizeof(username), stdin);
+	username[strcspn(username, "\n")] = 0;
+	while(username[0]=='\0'){
+		printf("\n\t\t\t\t\tNama tidak boleh kosong");
+		Sleep(1000);
+		return main();
+	}
+	fprintf(fPtr, "Username:%s ", username);
+	
+	printf("\t\t\t\t\tPassword anda:    ");
+	fgets(password, sizeof(password), stdin);
+	password[strcspn(password, "\n")] = 0;
+	while(password[0]=='\0'){
+		printf("\n\t\t\t\t\tPassword tidak boleh kosong");
+		Sleep(1000);
+		return main();
+	}
+	fprintf(fPtr, "Password:%s\n", password);
+	
+	fclose(fPtr);
 }
 
 char refillMenu() {
