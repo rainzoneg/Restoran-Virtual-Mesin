@@ -7,11 +7,12 @@
 #include "library.h"
 #define ESC 27
 
-
-char username[100];
-char password[100];
+struct Account{
+	char name[100];
+	char password[100];
+	int cash;
+}user;
 char filename[50] = "account.txt";
-int cash;
 int process;
 char menu();
 char pesan();
@@ -21,6 +22,7 @@ char signup();
 int checkUseAccount;
 void helpMenu();
 char refillMenu();
+char discountMenu();
 
 int main(){
 	fflush(stdin);
@@ -65,21 +67,30 @@ char menu(){
 	/*Fungsi modular untuk main menu program*/
 	fflush(stdin);
 	system("cls");
-	system("color AF");
+	system("color E0");
 	if(checkUseAccount == 1){
-		printf("\n    User: %s", username);
-		printf("\n    Saldo: Rp %d", cash);
-		printf("\n\n\n\n\n");
+		printf("\n    User: %s", user.name);
+		printf("\n    Saldo: Rp %d", user.cash);
+		printf("\n");
 	}
 	else{
-		printf("\n\n\n\n\n\n\n");
+		printf("\n\n\n");
 	}
-	printf("\t\t\t\t\t Program Mememesan Makanan\n\n\n");
+	puts(
+    "\t\t\t    ___        _                          _     \n"                
+    "\t\t\t   | _ \\___ __| |_ __ _ _  _ _ _ __ _ _ _| |_     \n"              
+    "\t\t\t   |   / -_(_-|  _/ _` | || | '_/ _` | ' |  _|     \n"             
+    "\t\t\t   |_|_\\___/__/\\__\\__,_|\\_,_|_| \\__,_|_||_\\__|     \n"              
+    "\t\t\t   __   ___     _             _   __  __         _    _    \n"      
+    "\t\t\t   \\ \\ / (_)_ _| |_ _  _ __ _| | |  \\/  |__ _ __| |_ (_)_ _  ___ \n"
+    "\t\t\t    \\ V /| | '_|  _| || / _` | | | |\\/| / _` / _| ' \\| | ' \\/ -_)\n"
+    "\t\t\t     \\_/ |_|_|  \\__|\\_,_\\__,_|_| |_|  |_\\__,_\\__|_||_|_|_||_\\___|\n");    
 	printf("\t\t\t\t\t\t1.Pesan Makanan!\n\n");
 	printf("\t\t\t\t\t\t2.Isi Saldo\n\n");
-	printf("\t\t\t\t\t\t3.Bantuan\n\n");
-	printf("\t\t\t\t\t\t4.Logout\n\n");
-	printf("\t\t\t\t\t\t5.Keluar\n\n");
+	printf("\t\t\t\t\t\t3.Discount & Promo\n\n");
+	printf("\t\t\t\t\t\t4.Bantuan\n\n");
+	printf("\t\t\t\t\t\t5.Logout\n\n");
+	printf("\t\t\t\t\t\t6.Keluar\n\n");
 	printf("\t\t\t\t\t Masukan angka menu Anda:\n\n\n");
 	switch(getch()){
 		case '1':
@@ -91,14 +102,18 @@ char menu(){
 			return menu();
 			break;
 		case '3':
-			helpMenu();
+			discountMenu();
 			return menu();
 			break;
 		case '4':
-			/*Ketika logout, maka dikeluarkan dari menu dan kembali ke menu login*/
-			login();
+			helpMenu();
+			return menu();
 			break;
 		case '5':
+			/*Ketika logout, maka dikeluarkan dari menu dan kembali ke menu awal*/
+			main();
+			break;
+		case '6':
 			system("cls");
 			printf ("\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\tTerima kasih telah mencoba !\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 			Sleep(500);
@@ -123,9 +138,12 @@ char pesan()
 	char alamatTujuan[50];
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
-	printf("\n\n\n\n\t\t\t\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", user.name);
+		printf("\n    Saldo: Rp %d", user.cash);
+		printf("\n\n");
+	}
+	printf("\n\n\n\n\n\t\t\t\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
 	printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Jakarta Pusat\t\t\tB. Jakarta Barat");
 	printf("\n\t\t\t\t1. Koeno Koeni Cafe\t\t\t4. Rumah Makan Kebon Jeruk");
@@ -138,47 +156,50 @@ char pesan()
 	switch(getch()){
 		case '1':
 			x=1;
-			price=food1(username, cash);
+			price=food1(user.name, user.cash, checkUseAccount);
 			break;
 		case '2':
 			x=1;
-			price=food2(username, cash);
+			price=food2(user.name, user.cash, checkUseAccount);
 			break;
 		case '3':
 			x=1;
-			price=food3(username, cash);
+			price=food3(user.name, user.cash, checkUseAccount);
 			break;
 		case '4':
 			x=2;
-			price=food4(username, cash);
+			price=food4(user.name, user.cash, checkUseAccount);
 			break;
 		case '5':
 			x=2;
-			price=food5(username, cash);
+			price=food5(user.name, user.cash, checkUseAccount);
 			break;
 		case '6':
 			x=2;
-			price=food6(username, cash);
+			price=food6(user.name, user.cash, checkUseAccount);
 			break;
 		case '7':
 			x=3;
-			price=food7(username, cash);
+			price=food7(user.name, user.cash, checkUseAccount);
 			break;
 		case '8':
 			x=3;
-			price=food8(username, cash);
+			price=food8(user.name, user.cash, checkUseAccount);
 			break;
 		case '9':
 			x=3;
-			price=food9(username, cash);
+			price=food9(user.name, user.cash, checkUseAccount);
 			break;
 		case ESC:
 			menu();
 		case '0':
 			system("cls");
 			system("color 30");
-			printf("\n    User: %s", username);
-			printf("\n    Saldo: Rp %d", cash);
+			if(checkUseAccount == 1){
+				printf("\n    User: %s", user.name);
+				printf("\n    Saldo: Rp %d", user.cash);
+				printf("\n\n");
+			}
 			printf("\n\n\n\n\n\t\t\t\tMasukan restoran yang ingin anda pesan!\n\t\t\t  ");
 			printf("\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
 			printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
@@ -193,27 +214,27 @@ char pesan()
 			switch(getch()){
 			case '1':
 				x=4;
-				price=food10(username, cash);
+				price=food10(user.name, user.cash, checkUseAccount);
 				break;
 			case '2':
 				x=4;
-				price=food11(username, cash);			
+				price=food11(user.name, user.cash, checkUseAccount);			
 				break;
 			case '3':
 				x=4;
-				price=food12(username, cash);
+				price=food12(user.name, user.cash, checkUseAccount);
 				break;
 			case '4':
 				x=5;
-				price=food13(username, cash);			
+				price=food13(user.name, user.cash, checkUseAccount);			
 				break;
 			case '5':
 				x=5;
-				price=food14(username, cash);			
+				price=food14(user.name, user.cash, checkUseAccount);			
 				break;
 			case '6':
 				x=5;
-				price=food15(username, cash);			
+				price=food15(user.name, user.cash, checkUseAccount);			
 				break;
 			case '0':
 				pesan();
@@ -238,8 +259,11 @@ char pesan()
 	void address() {
 		system("cls");
 		system("color 30");
-		printf("\n    User: %s", username);
-		printf("\n    Saldo: Rp %d", cash);
+		if(checkUseAccount == 1){
+			printf("\n    User: %s", user.name);
+			printf("\n    Saldo: Rp %d", user.cash);
+			printf("\n\n\n\n\n");
+		}
 		/*Menentukan alamat user 1*/
 		printf("\n\n\n\n\n\t\t\t\tMasukan Alamat Domisili Anda!\n\t\t\t  ");
 		printf("\n\t\t\t\t1. Jakarta Pusat");
@@ -295,8 +319,11 @@ char pesan()
 	Sleep(500);
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", user.name);
+		printf("\n    Saldo: Rp %d", user.cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\n\n\t\t\t\t\t    Pesanan sedang dikonfirmasi.");
 	Sleep(400);
 	printf(".");
@@ -310,13 +337,13 @@ char pesan()
 
 	/*Mencetak struk pemesanan sebelum dilakukan transaksi. Jika saldo belum mencukupi, diarahkan ke menu top up saldo*/
 	do {	
-		struk(username, cash, alamatTujuan);
+		struk(user.name, user.cash, alamatTujuan);
 		
 		printf("\n\n\t\t\t\tHarga Ongkos\t\t\tRp %d", distance(x, y));
 		printf("\n\n\t\t\t\tTOTAL\t\t\t\tRp %d", price);
 		printf("\n\n\t\t\t\tApakah Anda ingin melanjutkan pembayaran: (y/n) ");
 		scanf(" %c", &check);
-		if(cash-price<0) {
+		if(user.cash-price<0) {
 			printf("\t\t\t\tSaldo Anda Tidak Cukup !");
 			printf("\n\t\t\t\tHarap isi saldo Anda: (y/n) ");
 			scanf(" %c", &check);
@@ -324,14 +351,17 @@ char pesan()
 				refillMenu();
 			}
 		}
-	} while(check =='n' || cash-price<0);
+	} while(check =='n' || user.cash-price<0);
 	/* Pengecekan looping untuk mengecek apakah saldo sudah cukup untuk membayar pesanan atau belum*/
 	size=0;
-	cash-=price;
+	user.cash-=price;
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", user.name);
+		printf("\n    Saldo: Rp %d", user.cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\n\n\t\t\t\t\t\tPesanan sedang dikonfirmasi.");
 	Sleep(400);
 	printf(".");
@@ -346,8 +376,11 @@ char pesan()
 	Sleep(500);
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", user.name);
+		printf("\n    Saldo: Rp %d", user.cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\n\n\t\t\t\t\t\tPesanan Sampai!");
 	process = 0;
 	Sleep(400);
@@ -357,11 +390,40 @@ char pesan()
 
 void helpMenu(){
 	system("cls");
-	system("color AF");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	system("color E0");
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", user.name);
+		printf("\n    Saldo: Rp %d", user.cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\n\n");
 	printf("\t\t\t\t\t Cara menggunakan Food Delivery System:\n\n");
+	printf("\t\t\t\t 1. Pilih menu dituju dengan memasukkan angka sesuai tertera pada layar\n ");
+	printf("\t\t\t\t 2. Anda dapat mengisi saldo terlebih dahulu \n");
+	printf("\t\t\t\t 3. Pilih restoran yang Anda ingin pesan \n");
+	printf("\t\t\t\t 4. Pesan makanan dan minuman sesuai keinginan Anda \n");
+	printf("\t\t\t\t	* Total pembayaran akan muncul pada layar \n");
+	printf("\t\t\t\t 	* Bila saldo kurang, maka sistem akan memberitahu kepada Anda \n");
+	printf("\t\t\t\t	untuk melakukan pengisian saldo \n");
+	printf("\t\t\t\t 5. Pilih lokasi Anda sesuai dengan alamat Anda ingin diantarkan \n");
+	printf("\t\t\t\t 6. Akan muncul pesan konfirmasi pembayaran sebelum memesan \n");
+	printf("\t\t\t\t 7. Tunggu proses pengantaran sampai selesai\n");
+	printf("\t\t\t\t 8. Anda akan dapat struk pembayaran sebagai bukti bahwa pesanan Anda\n");
+	printf("\t\t\t\t  	telah sampai \n\n");
+	printf("\t\t\t\t   Tekan tombol apapun untuk kembali...");
+	getch();
+}
+
+char discountMenu(){
+	system("cls");
+	system("color E0");
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", user.name);
+		printf("\n    Saldo: Rp %d", user.cash);
+		printf("\n\n\n\n\n");
+	}
+	printf("\n\n\n\n\n\n");
+	printf("\t\t\t\t\t Cara menggunakan Restaurant Virtual System:\n\n");
 	printf("\t\t\t\t 1. Pilih menu dituju dengan memasukkan angka sesuai tertera pada layar\n ");
 	printf("\t\t\t\t 2. Anda dapat mengisi saldo terlebih dahulu \n");
 	printf("\t\t\t\t 3. Pilih restoran yang Anda ingin pesan \n");
@@ -407,9 +469,9 @@ char login(){
 		    while(fgets(line, sizeof(line), fPtr))
 		    {
 		    	line[strcspn(line, "\n")] = 0;
-		    	if(sscanf(line, "Username:%99s Password:%99s", username, password) == 2){
-		    		x = strcmp(unLogin, username);
-			    	y = strcmp(pwLogin, password);
+		    	if(sscanf(line, "Username:%99s Password:%99s", user.name, user.password) == 2){
+		    		x = strcmp(unLogin, user.name);
+			    	y = strcmp(pwLogin, user.password);
 			        if (x == 0 && y == 0) {
 	                    printf("\n\t\t\t\t\t>>>User dan password terverifikasi!<<<\n");
 	                    notFound = 0;
@@ -432,7 +494,7 @@ char login(){
 		}	
 	}while(n==1);
 	checkUseAccount = 1;
-	printf("\n\t\t\t\t\tSelamat datang, %s", username);
+	printf("\n\t\t\t\t\tSelamat datang, %s", user.name);
 	Sleep(200);
 	printf("\n\t\t\t\t\tPlease wait.");
 	Sleep(400);
@@ -464,24 +526,24 @@ char signup(){
 	printf("\t\t\t\t\t\t\tSign-Up\n\n\n");
 	
 	printf("\t\t\t\t\tNama anda:    ");
-	fgets(username, sizeof(username), stdin);
-	username[strcspn(username, "\n")] = 0;
-	while(username[0]=='\0'){
+	fgets(user.name, sizeof(user.name), stdin);
+	user.name[strcspn(user.name, "\n")] = 0;
+	while(user.name[0]=='\0'){
 		printf("\n\t\t\t\t\tNama tidak boleh kosong");
 		Sleep(1000);
 		return main();
 	}
-	fprintf(fPtr, "Username:%s ", username);
+	fprintf(fPtr, "Username:%s ", user.name);
 	
 	printf("\t\t\t\t\tPassword anda:    ");
-	fgets(password, sizeof(password), stdin);
-	password[strcspn(password, "\n")] = 0;
-	while(password[0]=='\0'){
+	fgets(user.password, sizeof(user.password), stdin);
+	user.password[strcspn(user.password, "\n")] = 0;
+	while(user.password[0]=='\0'){
 		printf("\n\t\t\t\t\tPassword tidak boleh kosong");
 		Sleep(1000);
 		return main();
 	}
-	fprintf(fPtr, "Password:%s\n", password);
+	fprintf(fPtr, "Password:%s\n", user.password);
 	
 	fclose(fPtr);
 }
@@ -490,13 +552,20 @@ char refillMenu() {
 	/*Fungsi untuk menangani refill/top-up saldo user*/
 	int mobileNumber = 0;
 	system("cls");
-	system("color AF");
+	system("color 9F");
 	int a = 0;
 	int loopCheck = 0;
 	do{
-		printf("\n\t\t\t\t\t\t      User: %s", username);
-		printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
-		printf("\n\n\n");
+		if(checkUseAccount == 1){
+			printf("\n\t\t\t\t\t\t      User: %s", user.name);
+			printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", user.cash);
+			printf("\n\n\n");
+		}
+		else{
+			printf("\n\t\t\t\t\t   User: Tidak Menggunakan Account");
+			printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", user.cash);
+			printf("\n\n\n");
+		}
 		/*3 Metode top-up:*/
 		printf("Pilih metode top up:\n\n");
 		printf("1. Mobile Credit\n");
@@ -511,8 +580,8 @@ char refillMenu() {
 				while(mobileNumber < 100000)
 				{
 					system("cls");
-					printf("\n\t\t\t\t\t\t      User: %s", username);
-					printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+					printf("\n\t\t\t\t\t\t      User: %s", user.name);
+					printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", user.cash);
 					printf("\n\n\n");
 					printf("Masukkan nomor mobile anda: ");
 					scanf("%d", &mobileNumber);
@@ -527,8 +596,8 @@ char refillMenu() {
 				while(loopCheck<1)
 				{
 					system("cls");
-					printf("\n\t\t\t\t\t\t      User: %s", username);
-					printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+					printf("\n\t\t\t\t\t\t      User: %s", user.name);
+					printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", user.cash);
 					printf("\n\n\n");
 					printf("Masukan saldo Anda : \n");
 					scanf("%d", &a);
@@ -551,8 +620,8 @@ char refillMenu() {
 				break;
 			case '2':
 				system("cls");
-				printf("\n\t\t\t\t\t\t      User: %s", username);
-				printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+				printf("\n\t\t\t\t\t\t      User: %s", user.name);
+				printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", user.cash);
 				printf("\n\n\n");
 				printf("Pilihlah voucher saldo yang ingin dibeli:\n");
 				printf("1. Rp10.000,00\n");
@@ -600,8 +669,8 @@ char refillMenu() {
 				break;
 			case '3':
 				system("cls");
-				printf("\n\t\t\t\t\t\t      User: %s", username);
-				printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+				printf("\n\t\t\t\t\t\t      User: %s", user.name);
+				printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", user.cash);
 				printf("\n\n\n");
 				printf("Masukan saldo Anda : \n");
 				scanf("%d", &a);
@@ -631,7 +700,7 @@ char refillMenu() {
 				return refillMenu();
 		}
 	} while(a<5000);
-	cash+=a;
+	user.cash+=a;
 	Sleep(200);
 	printf("\nPlease wait.");
 	Sleep(400);
@@ -640,8 +709,8 @@ char refillMenu() {
 	printf(".");
 	Sleep(500);
 	system("cls");
-	printf("\n\t\t\t\t\t\t      User: %s", username);
-	printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", cash);
+	printf("\n\t\t\t\t\t\t      User: %s", user.name);
+	printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", user.cash);
 	printf("\n\n\nTransaksi Berhasil");
 	Sleep(400);
 	printf("\n\nKetik apapun untuk kembali...");

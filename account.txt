@@ -1,2 +1,7 @@
 Username:TestHenrik Password:TestHenrik
 Username:admin Password:admin
+Username:admintest1 Password:admintest1
+Username:testing1 Password:testing1
+Username:testing2 Password:testing2
+Username:testing Password:testing
+Username:admins Password:admins

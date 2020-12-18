@@ -65,7 +65,7 @@ int distance(int restaurant, int location)
 
 
 
-int food1(char username[50], int cash) 
+int food1(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -74,8 +74,11 @@ int food1(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -155,7 +158,7 @@ int food1(char username[50], int cash)
 	
 }
 
-int food2(char username[50], int cash) 
+int food2(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -164,8 +167,11 @@ int food2(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -244,7 +250,7 @@ int food2(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food3(char username[50], int cash) 
+int food3(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -253,8 +259,11 @@ int food3(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -333,7 +342,7 @@ int food3(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food4(char username[50], int cash) 
+int food4(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -342,8 +351,11 @@ int food4(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -422,7 +434,7 @@ int food4(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food5(char username[50], int cash) 
+int food5(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -431,8 +443,11 @@ int food5(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -511,7 +526,7 @@ int food5(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food6(char username[50], int cash) 
+int food6(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -520,8 +535,11 @@ int food6(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -600,7 +618,7 @@ int food6(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food7(char username[50], int cash) 
+int food7(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -609,8 +627,11 @@ int food7(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -689,7 +710,7 @@ int food7(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food8(char username[50], int cash) 
+int food8(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -698,8 +719,11 @@ int food8(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -778,7 +802,7 @@ int food8(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food9(char username[50], int cash) 
+int food9(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -787,8 +811,11 @@ int food9(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -867,7 +894,7 @@ int food9(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food10(char username[50], int cash) 
+int food10(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -876,8 +903,11 @@ int food10(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -956,7 +986,7 @@ int food10(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food11(char username[50], int cash) 
+int food11(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -965,8 +995,11 @@ int food11(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -1045,7 +1078,7 @@ int food11(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food12(char username[50], int cash) 
+int food12(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -1054,8 +1087,11 @@ int food12(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -1134,7 +1170,7 @@ int food12(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food13(char username[50], int cash) 
+int food13(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -1143,8 +1179,11 @@ int food13(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -1223,7 +1262,7 @@ int food13(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food14(char username[50], int cash) 
+int food14(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -1232,8 +1271,11 @@ int food14(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
@@ -1312,7 +1354,7 @@ int food14(char username[50], int cash)
 	return total; //Harga Total
 }
 
-int food15(char username[50], int cash) 
+int food15(char username[50], int cash, int checkUseAccount) 
 {
 	int total=0;
 	int option;
@@ -1321,8 +1363,11 @@ int food15(char username[50], int cash)
 	do {
 	system("cls");
 	system("color 30");
-	printf("\n    User: %s", username);
-	printf("\n    Saldo: Rp %d", cash);
+	if(checkUseAccount == 1){
+		printf("\n    User: %s", username);
+		printf("\n    Saldo: Rp %d", cash);
+		printf("\n\n\n\n\n");
+	}
 	printf("\n\n\n\n\t\t\t\tPilih makanan/minuman dengan memasukkan nomor");
 	printf("\n\t\t\t\tsesuai tertera pada layar\n\t\t\t  ");
 	printf("\n\n\t\t\t\tA. Makanan :");
