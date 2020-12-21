@@ -447,7 +447,9 @@ char login(){
 	int notFound = 0;
 	char unLogin[100], pwLogin[100];
 	char line[128];
+	char *cashPtr;
 	FILE *fPtr;
+	char updateCash[100];
 	
 	do{
 		fflush(stdin);
@@ -469,10 +471,11 @@ char login(){
 		    while(fgets(line, sizeof(line), fPtr))
 		    {
 		    	line[strcspn(line, "\n")] = 0;
-		    	if(sscanf(line, "Username:%99s Password:%99s", user.name, user.password) == 2){
+		    	if(sscanf(line, "Username:%99s Password:%99s Saldo:%99s", user.name, user.password, updateCash) == 3){
 		    		x = strcmp(unLogin, user.name);
-			    	y = strcmp(pwLogin, user.password);
+			    	y = strcmp(pwLogin, user.password);	
 			        if (x == 0 && y == 0) {
+			        	user.cash = strtol(updateCash, &cashPtr, 10);
 	                    printf("\n\t\t\t\t\t>>>User dan password terverifikasi!<<<\n");
 	                    notFound = 0;
 	                    n = 0;
@@ -543,8 +546,8 @@ char signup(){
 		Sleep(1000);
 		return main();
 	}
-	fprintf(fPtr, "Password:%s\n", user.password);
-	
+	fprintf(fPtr, "Password:%s ", user.password);
+	fprintf(fPtr, "Saldo:0\n");
 	fclose(fPtr);
 }
 
@@ -554,12 +557,22 @@ char refillMenu() {
 	system("cls");
 	system("color 9F");
 	int a = 0;
+	char line[128];
 	int loopCheck = 0;
+	int notFound = 0;
+	char updateName[100];
+	char updatePassword[100];
+	char updateSaldo[100];
+	int x,y;
+	
+	
+	
 	do{
 		if(checkUseAccount == 1){
 			printf("\n\t\t\t\t\t\t      User: %s", user.name);
 			printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", user.cash);
 			printf("\n\n\n");
+			
 		}
 		else{
 			printf("\n\t\t\t\t\t   User: Tidak Menggunakan Account");
@@ -701,6 +714,56 @@ char refillMenu() {
 		}
 	} while(a<5000);
 	user.cash+=a;
+	FILE *fPtr;
+	FILE *fPtr2;
+	int lnum = 0, lineCount = 0;
+	char string[256];
+	fPtr = fopen(filename, "r");
+	if (fPtr)
+	{
+		while(fgets(line, sizeof(line), fPtr))
+		{
+		    line[strcspn(line, "\n")] = 0;
+		    if(sscanf(line, "Username:%99s Password:%99s Saldo:%s", updateName, updatePassword, updateSaldo) == 3){
+		    	x = strcmp(user.name, updateName);
+			    y = strcmp(user.password, updatePassword);			    
+			    if (x == 0 && y == 0) {
+			    	lnum++;
+					Sleep(1000);
+	                notFound = 0;
+					break;
+	            }
+	            else {
+	                notFound = 1;
+					lnum++;
+	                continue;
+	            }    
+			}
+		}
+		    fclose(fPtr);
+	}	
+	fPtr = fopen(filename, "r");
+	fPtr2 = fopen("temp.txt", "w");
+	while (!feof(fPtr)) {
+            strcpy(string, "\0");
+            fgets(string, sizeof(string), fPtr);
+            if (!feof(fPtr)) {
+                lineCount++;
+                /* skip the line at given line number */
+                if (lineCount != lnum) {
+                    fprintf(fPtr2, "%s", string);
+                } 
+				else {
+                    /* replacing with new input line */
+                    fprintf(fPtr2, "Username:%s Password:%s Saldo:%d\n", user.name, user.password, user.cash);
+                }
+            }
+    }
+    fclose(fPtr);
+    fclose(fPtr2);
+    remove(filename);
+    rename("temp.txt", filename);
+
 	Sleep(200);
 	printf("\nPlease wait.");
 	Sleep(400);

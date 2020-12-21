@@ -1,7 +1,3 @@
-Username:TestHenrik Password:TestHenrik
-Username:admin Password:admin
-Username:admintest1 Password:admintest1
-Username:testing1 Password:testing1
-Username:testing2 Password:testing2
-Username:testing Password:testing
-Username:admins Password:admins
+Username:admin Password:admin Saldo:10000
+Username:testing Password:testing Saldo:40000
+Username:admintest1 Password:admintest1 Saldo:99800
