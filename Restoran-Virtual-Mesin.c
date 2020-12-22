@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <string.h>
 #include "library.h"
+#include "jurumasak.h"
 #define ESC 27
 
 struct Account{
@@ -141,7 +142,7 @@ char pesan()
 	if(checkUseAccount == 1){
 		printf("\n    User: %s", user.name);
 		printf("\n    Saldo: Rp %d", user.cash);
-		printf("\n\n");
+		
 	} 
 	printf("\n\n\n\n\n\t\t\t\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
 	printf("\tESC untuk kembali ke halaman utama) \n\t\t\t  ");
@@ -190,7 +191,7 @@ char pesan()
 	} else {
 		price = -price;
 	}
-	printf("\n\n\n\n\n\n\t\t\t\t\t    Pesanan sedang diproses.");
+	printf("\n\n\n\n\n\n\t\t\t\t\t    Pesanan telah diterima.");
 	Sleep(400);
 	printf(".");
 	Sleep(400);
@@ -234,12 +235,15 @@ char pesan()
 	Sleep(400);
 	printf(".");
 	Sleep(500);
-	printf("\n\t\t\t\t\t\tPesanan sedang diantar.");
+	printf("\n\t\t\t\t\t\tPesanan sedang diproses.");
 	Sleep(400);
 	printf(".");
 	Sleep(400);
 	printf(".");
 	Sleep(500);
+	displayAnimation();
+	displayAnimation();
+	Sleep(1000);
 	system("cls");
 	system("color 30");
 	if(checkUseAccount == 1){
@@ -247,8 +251,62 @@ char pesan()
 		printf("\n    Saldo: Rp %d", user.cash);
 		printf("\n\n\n\n\n");
 	}
-	printf("\n\n\n\n\n\n\t\t\t\t\t\tPesanan Sampai!");
+	printf("\n\n\n\n\n\n\t\t\t\t\t\tPesanan Selesai!");
 	process = 0;
+	char line[128];
+	int notFound = 0;
+	char updateName[100];
+	char updatePassword[100];
+	char updateSaldo[100];
+	FILE *fPtr;
+	FILE *fPtr2;
+	int lnum = 0, lineCount = 0;
+	char string[256];
+	fPtr = fopen(filename, "r");
+	if (fPtr)
+	{
+		while(fgets(line, sizeof(line), fPtr))
+		{
+		    line[strcspn(line, "\n")] = 0;
+		    if(sscanf(line, "Username:%99s Password:%99s Saldo:%s", updateName, updatePassword, updateSaldo) == 3){
+		    	x = strcmp(user.name, updateName);
+			    y = strcmp(user.password, updatePassword);			    
+			    if (x == 0 && y == 0) {
+			    	lnum++;
+					Sleep(1000);
+	                notFound = 0;
+					break;
+	            }
+	            else {
+	                notFound = 1;
+					lnum++;
+	                continue;
+	            }    
+			}
+		}
+		    fclose(fPtr);
+	}	
+	fPtr = fopen(filename, "r");
+	fPtr2 = fopen("temp.txt", "w");
+	while (!feof(fPtr)) {
+            strcpy(string, "\0");
+            fgets(string, sizeof(string), fPtr);
+            if (!feof(fPtr)) {
+                lineCount++;
+                /* skip the line at given line number */
+                if (lineCount != lnum) {
+                    fprintf(fPtr2, "%s", string);
+                } 
+				else {
+                    /* replacing with new input line */
+                    fprintf(fPtr2, "Username:%s Password:%s Saldo:%d\n", user.name, user.password, user.cash);
+                }
+            }
+    }
+    fclose(fPtr);
+    fclose(fPtr2);
+    remove(filename);
+    rename("temp.txt", filename);
 	Sleep(400);
 	getch();
 }
@@ -260,57 +318,83 @@ void helpMenu(){
 	if(checkUseAccount == 1){
 		printf("\n    User: %s", user.name);
 		printf("\n    Saldo: Rp %d", user.cash);
-		printf("\n\n\n\n\n");
+		printf("");
 	}
-	printf("\n\n\n\n\n\n");
-	printf("\t\t\t\t\t Cara menggunakan Food Delivery System:\n\n");
-	printf("\t\t\t\t 1. Pilih menu dituju dengan memasukkan angka sesuai tertera pada layar\n ");
-	printf("\t\t\t\t 2. Anda dapat mengisi saldo terlebih dahulu \n");
-	printf("\t\t\t\t 3. Pilih restoran yang Anda ingin pesan \n");
-	printf("\t\t\t\t 4. Pesan makanan dan minuman sesuai keinginan Anda \n");
-	printf("\t\t\t\t	* Total pembayaran akan muncul pada layar \n");
-	printf("\t\t\t\t 	* Bila saldo kurang, maka sistem akan memberitahu kepada Anda \n");
-	printf("\t\t\t\t	untuk melakukan pengisian saldo \n");
-	printf("\t\t\t\t 5. Pilih lokasi Anda sesuai dengan alamat Anda ingin diantarkan \n");
-	printf("\t\t\t\t 6. Akan muncul pesan konfirmasi pembayaran sebelum memesan \n");
-	printf("\t\t\t\t 7. Tunggu proses pengantaran sampai selesai\n");
-	printf("\t\t\t\t 8. Anda akan dapat struk pembayaran sebagai bukti bahwa pesanan Anda\n");
-	printf("\t\t\t\t  	telah sampai \n\n");
-	printf("\t\t\t\t   Tekan tombol apapun untuk kembali...");
+	printf("\n\n\n");
+	printf("\t   ##################################################################################################\n");
+	printf("\t   #                                                                                                #\n");
+	printf("\t   #\t\t\t Cara menggunakan Restaurant Virtual Machine:                               #\n");
+	printf("\t   #                                                                                                #\n");
+	printf("\t   #\t\t 1. Pilih menu dituju dengan memasukkan angka sesuai tertera pada layar             #\n");
+	printf("\t   #\t\t 2. Pemesanan dapat dilakukan menggunakan akun ataupun tidak menggunakan akun:      #\n");
+	printf("\t   #\t\t    * Dengan akun, pembayaran dilakukan menggunakan sistem saldo                    #\n");
+	printf("\t   #\t\t    * Saldo dapat diisi terlebih dahulu melalui beberapa cara                       #\n");
+	printf("\t   #\t\t    * Tanpa akun, pembayaran hanya dilakukan secara langsung/tunai                  #\n");
+	printf("\t   #\t\t 3. Penggunakan akun mendapatkan benefit seperti diskon/bonus saldo,                #\n");
+	printf("\t   #\t\t    dan akun beserta saldo user akan tersimpan untuk dapat dipakai lagi             #\n");
+	printf("\t   #\t\t 4. Pesan makanan dan minuman sesuai keinginan Anda dengan menambahkan ke cart      #\n");
+	printf("\t   #\t\t	* Total harga dan pembayaran akan muncul pada layar                         #\n");
+	printf("\t   #\t\t	* Dapat menghapus pesanan jika tidak jadi                                   #\n");
+	printf("\t   #\t\t 	* Bila saldo kurang, maka sistem akan memberitahu kepada Anda               #\n");
+	printf("\t   #\t\t    untuk melakukan pengisian saldo                                                 #\n");
+	printf("\t   #\t\t 5. Akan muncul pesan konfirmasi pembayaran sebelum memesan                         #\n");
+	printf("\t   #\t\t 6. Tunggu pesanan diproses sampai selesai                                          #\n");
+	printf("\t   #\t\t 7. Anda akan dapat struk pembayaran sebagai bukti bahwa pesanan Anda               #\n");
+	printf("\t   #\t\t    telah sampai                                                                    #\n");
+	printf("\t   #                                                                                                #\n");
+	printf("\t   #\t\t   Tekan tombol apapun untuk kembali... 					    #\n");
+	printf("\t   #                                                                                                #\n");
+	printf("\t   ##################################################################################################\n");
 	getch();
 }
 
 char discountMenu(){
 	system("cls");
-	system("color E0");
+	system("color B0");
 	if(checkUseAccount == 1){
 		printf("\n    User: %s", user.name);
 		printf("\n    Saldo: Rp %d", user.cash);
-		printf("\n\n\n\n\n");
+		printf("\n\n\n\n");
 	} else {
-		printf("\n\t\tMohon maaf, kupon hanya dapat dibagikan pada akun yang telah terdaftar");
+		printf("\n\n\n\n\n\n\n\n\t\t\tMohon maaf, kupon hanya dapat dibagikan pada akun yang telah terdaftar");
 		Sleep(400);
 		printf("\n\n");
-		printf("\n\nKetik apapun untuk kembali...");
+		printf("\n\n\t\t\t\t\t    Ketik apapun untuk kembali...");
 		getch();
 		menu();
 	}
-	printf("\n\n\n\n\n\n");
-	printf("\t\t\t\t\t Cara menggunakan Restaurant Virtual System:\n\n");
-	printf("\t\t\t\t 1. Pilih menu dituju dengan memasukkan angka sesuai tertera pada layar\n ");
-	printf("\t\t\t\t 2. Anda dapat mengisi saldo terlebih dahulu \n");
-	printf("\t\t\t\t 3. Pilih restoran yang Anda ingin pesan \n");
-	printf("\t\t\t\t 4. Pesan makanan dan minuman sesuai keinginan Anda \n");
-	printf("\t\t\t\t	* Total pembayaran akan muncul pada layar \n");
-	printf("\t\t\t\t 	* Bila saldo kurang, maka sistem akan memberitahu kepada Anda \n");
-	printf("\t\t\t\t	untuk melakukan pengisian saldo \n");
-	printf("\t\t\t\t 5. Pilih lokasi Anda sesuai dengan alamat Anda ingin diantarkan \n");
-	printf("\t\t\t\t 6. Akan muncul pesan konfirmasi pembayaran sebelum memesan \n");
-	printf("\t\t\t\t 7. Tunggu proses pengantaran sampai selesai\n");
-	printf("\t\t\t\t 8. Anda akan dapat struk pembayaran sebagai bukti bahwa pesanan Anda\n");
-	printf("\t\t\t\t  	telah sampai \n\n");
-	printf("\t\t\t\t   Tekan tombol apapun untuk kembali...");
-	getch();
+	printf("\n\n");
+	printf("\t\t\t\t\t Diskon dan Promo yang tersedia:\n\n");
+	printf("\t\t\t\t\t   1. Bonus saldo Rp.10000\n\n\n ");
+	printf("\t\t\t\t\t   2. Bonus saldo Rp.20000 \n\n\n");
+	printf("\t\t\t\t\t   3. Potongan diskon 25% \n\n\n");
+	printf("\t\t\t\t\t   4. Placeholder \n\n\n");
+	printf("\t\t\t\t\t   5. Kembali ke menu");
+	switch(getch()){
+		case '1':
+			printf("\nPlaceholder");
+			break;
+		case '2':
+			printf("\nPlaceholder");
+			break;
+		case '3':
+			printf("\nPlaceholder");
+			break;
+		case '4':
+			printf("\nPlaceholder");
+			break;
+		case '5':
+			menu();
+			break;
+		case ESC:
+			menu();
+			break;
+		default:
+			printf ("Input salah !\n");
+			printf ("Masukan angka menu dengan benar.\n");
+			system("pause");
+			return pesan();
+	}	
 }
 
 char login(){
