@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <string.h>
+#include <time.h>
 #include "library.h"
 #include "jurumasak.h"
 #define ESC 27
@@ -238,7 +239,7 @@ char pesan()
 		}
 	} while(check =='n' || user.cash-price<0);
 	/* Pengecekan looping untuk mengecek apakah saldo sudah cukup untuk membayar pesanan atau belum*/
-
+	printBill(user.name, user.cash);
 	user.cash-=price;
 	system("cls");
 	system("color 30");

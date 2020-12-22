@@ -147,22 +147,25 @@ void proses(int num, char* food, int num_1) {
 	int item;	
 	printf("\n\t\t\t\t\tBerapa porsi: ");
 	scanf("%d", &item);
-	
+	//Dynamic data structure
 	//linked list
 	temp = (data*) malloc(sizeof (data));
+	/*Alokasi data pada temp*/
 	
 	/*Masukan data pada node temp*/
 	temp->id =num;
 	temp->name=food;
 	temp->price=num_1;
 	temp->item=item;
-	
+	/*Start sebagai patokan pertama node */
 	if (start == 0) {
 		start = temp;
 	} else {
 	    head->next = temp;
+	    /*Head untuk mentrack record data temp dan begitu seterusnya untuk temp yang next*/
 	}
 	temp->next = 0;
+	/*Perujukkan node ke node berikutnya (NULL atau 0)*/
 	head = temp;
 	
 }
@@ -172,19 +175,21 @@ void removeId() {
 	display();
 	temp =start;
 	int i;
-	
+	/*Penghapusan node pemesanan berdasarkan ID pesanan*/
+	/*Apabila isi temp kosong, penghapusan skip (tidak ada yang perlu dihapus)*/
   	if(temp!=0){
   		printf("\nMasukan ID menu nomor : \n");
   		scanf("%d", &i);
-  		if(i == temp->id){ //Hapus jika node pertama
+  		if(i == temp->id){ /*Penghapusan jika merupakan node pertama, temp dari awal sudah yang sesuai (situasi 1)*/
   			temp = temp->next;
   			start=temp;
   			printf("Nomor menu %d berhasil dihapus",head->id);
 		} 
-  		while(temp!=0){ //Node berikutnya
+  		while(temp!=0){ /*Penghapusan untuk situasi 2, dimana set prev untuk track temp, kemudian temp berikutnya, sampai id yang dicari sudah sama, dilebur*/
   			if(i==temp->id) {
   				prev->next=temp->next;
   				head = prev;
+  				/*Setelah peleburan maka head diisi data prev*/
   				printf("Nomor menu %d berhasil dihapus",temp->id);
   				break;		
   			} 
@@ -202,6 +207,7 @@ void display() {
 	fflush(stdin);
 	system("cls");
 	temp = start;
+	/*Temp diset ke start awal lagi untuk pencetakkan struk*/
 	printf("\n\t\t   ===================      DAFTAR   PESANAN   ANDA      =================== \n\n");
 	printf("\t\tID\tNama Makanan\t\tHarga\t\t\tPorsi\t\tJumlah\n");
 	printf("");
@@ -209,8 +215,27 @@ void display() {
 		printf("\t\t%d\t%s\t\tRp %d\t\t%d\t\tRp %d\n", temp->id, temp->name,temp->price, temp->item, temp->item*temp->price);
     	temp = temp -> next;
 	}
-
   	getch();
+}
+
+void printBill(char username[50], int cash){
+	char texting[100];
+	char filename[50] = "bill.txt";
+	time_t t;
+	time(&t);
+	temp = start;
+	/*Temp diset ke start awal lagi untuk pencetakkan struk ke file .txt bon*/
+	FILE *fPtr;
+	sprintf(texting, "%s%s", username, filename);
+	fPtr = fopen(texting, "a");
+	fprintf(fPtr, "\n\t\t   ===================      DAFTAR   PESANAN   ANDA      =================== \n\n");
+	fprintf(fPtr, "\t\tNama:%s\t\t\t\t\tTanggal:%s",username, ctime(&t));
+	fprintf(fPtr, "\t\tID\tNama Makanan\t\tHarga\t\t\tPorsi\t\tJumlah\n");
+	fprintf(fPtr, "");
+	while (temp != 0) {
+		fprintf(fPtr, "\t\t%d\t%s\t\tRp %d\t\t%d\t\tRp %d\n", temp->id, temp->name,temp->price, temp->item, temp->item*temp->price);
+    	temp = temp -> next;
+	}
 }
 
 int count() {
