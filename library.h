@@ -8,7 +8,7 @@ struct node {
 
 void insert();
 void display();
-void delete();
+void removeId();
 void proses(int num, char* food, int num_1);
 int count();
 int Id, total;
@@ -42,7 +42,7 @@ int food(char username[50], int cash, int checkUseAccount) {
         food(username, cash, checkUseAccount);
         break;
       case '3':
-      	delete();
+      	removeId();
       	food(username, cash, checkUseAccount);
         break;
       case '4':
@@ -69,11 +69,11 @@ void insert() {
 	printf("\n\n\t\t\t\t\tA. Makanan :");
 	printf("\n\t\t\t\t\t1. Nasi Liwet\t\tRp 18.000");
 	printf("\n\t\t\t\t\t2. Mie Lethek\t\tRp 15.000");
-	printf("\n\t\t\t\t\t3. Gethuk\t\tRp 7.000");
-	printf("\n\t\t\t\t\t4. Gudeg\t\tRp 17.000");
+	printf("\n\t\t\t\t\t3. Gethuk Manis\t\tRp 12.000");
+	printf("\n\t\t\t\t\t4. Gudeg Jawa\t\tRp 17.000");
 	printf("\n\t\t\t\t\t5. Nasi Grombyong\tRp 16.000");
 	printf("\n\n\t\t\t\t\tB. Minuman :");
-	printf("\n\t\t\t\t\t6. Wedang Uwuh\t\tRp 8.000");
+	printf("\n\t\t\t\t\t6. Wedang Uwuh\t\tRp 10.000");
 	printf("\n\t\t\t\t\t7. Bir Pletok\t\tRp 10.000");
 	printf("\n\t\t\t\t\t8. Es Dawet\t\tRp 15.000\n\n\n");
 	printf("\n\t\t\t\t\tPesan Nomor : ");
@@ -96,14 +96,14 @@ void insert() {
 	} else if(choice==3)
 	{
 		Id++;
-		char *name_food = "Gethuk";
-		choice=7000;
+		char *name_food = "Gethuk Manis";
+		choice=12000;
 		proses(Id, name_food, choice);
 				
 	} else if(choice==4)
 	{
 		Id++;
-		char *name_food = "Gudeg";
+		char *name_food = "Gudeg Jawa";
 		choice=17000;
 		proses(Id, name_food, choice);
 				
@@ -118,7 +118,7 @@ void insert() {
 	{
 		Id++;
 		char *name_food = "Wedang Uwuh";
-		choice=8000;
+		choice=10000;
 		proses(Id, name_food, choice);
 				
 	} else if(choice==7)
@@ -166,68 +166,34 @@ void proses(int num, char* food, int num_1) {
 }
 
 
-void delete() {
-  int countvalue, pos, i = 0;
-
-  display();
-
-  printf("\nMasukan ID menu : \n");
-  scanf("%d", &pos);
-//  if(pos>0 &&pos<=countvalue) {
-//  	if(temp->id==pos){
-//	  	temp = temp -> next;
-//	  	start = temp;
-//	  	getch();
-//  }
-//  else {
-//  	while (temp != 0) {
-//        if (i == (pos - 1)) {
-//          prev->next = temp->next;
-//          if(i == (countvalue - 1))
-//          {
-//			  head = prev;
-//		  }
-//          printf("\nDeleted Successfully \n\n");
-//          break;
-//        } else {
-//          i++;
-//          prev = temp;
-//          temp = temp -> next;
-//        }
-//      }
-//    }
-//  } else {
-//  
-//    printf("\nInvalid Position \n\n");
-//  	
-//  
-//  }
-  
+void removeId() {
+	display();
+	temp =start;
+	int i;
 	
-//  if (pos > 0 && pos <= countvalue) {
-//    if (pos == 1) {
-//      temp = temp -> next;
-//      start = temp;
-//      printf("\nDeleted Successfully \n\n");
-//    } else {
-//      while (temp != 0) {
-//        if (i == (pos - 1)) {
-//          prev->next = temp->next;
-//          if(i == (countvalue - 1))
-//          {
-//			  head = prev;
-//		  }
-//          printf("\nDeleted Successfully \n\n");
-//          break;
-//        } else {
-//          i++;
-//          prev = temp;
-//          temp = temp -> next;
-//        }
-//      }
-//    }
-//  } else
-//    printf("\nInvalid Position \n\n");
+  	if(temp!=0){
+  		printf("\nMasukan ID menu nomor : \n");
+  		scanf("%d", &i);
+  		if(i == temp->id){ //Hapus jika node pertama
+  			temp = temp->next;
+  			start=temp;
+  			printf("Nomor menu %d berhasil dihapus",head->id);
+		} 
+  		while(temp!=0){ //Node berikutnya
+  			if(i==temp->id) {
+  				prev->next=temp->next;
+  				head = prev;
+  				printf("Nomor menu %d berhasil dihapus",temp->id);
+  				break;		
+  			} 
+  			prev = temp;
+  			temp = temp->next;
+		}
+	} else {
+		printf("\n\n\t\tBelum ada pesanan. Silahkan pesan terlebih dahulu sebelum menggunakan fitur menghapus");
+	}
+  getch();
+  
 }
 
 void display() {
