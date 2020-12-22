@@ -12,6 +12,7 @@ struct Account{
 	char password[100];
 	int cash;
 }user;
+
 char filename[50] = "account.txt";
 int process;
 char menu();
@@ -130,192 +131,55 @@ char pesan()
 {
 	/*Fungsi yang menangani proses pemesanan makanan/minuman dari restoran*/
 	fflush(stdin);
-	size = 0;
+
 	char restoran[100];
 	int x;
 	int y;
 	int price;
-	char alamatTujuan[50];
 	system("cls");
 	system("color 30");
 	if(checkUseAccount == 1){
 		printf("\n    User: %s", user.name);
 		printf("\n    Saldo: Rp %d", user.cash);
 		printf("\n\n");
-	}
+	} 
 	printf("\n\n\n\n\n\t\t\t\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
-	printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
-	printf("\n\n\t\t\t\tA. Jakarta Pusat\t\t\tB. Jakarta Barat");
-	printf("\n\t\t\t\t1. Koeno Koeni Cafe\t\t\t4. Rumah Makan Kebon Jeruk");
-	printf("\n\t\t\t\t2. Oseng Mercon Bu Ani Samanhudi\t5. Nasi Kapau Uni Liis");
-	printf("\n\t\t\t\t3. RM Sari Rasa Kebon Kacang\t\t6. Bundo Kanduang Mangga Besar");
-	printf("\n\n\t\t\t\tC. Jakarta Utara");
-	printf("\n\t\t\t\t7. Nasi Sariasa Sawah Besar");
-	printf("\n\t\t\t\t8. Rumah Makan Tjilik Riwut ");
-	printf("\n\t\t\t\t9. Telaga Sampireun Ancol\n\n\n");
+	printf("\tESC untuk kembali ke halaman utama) \n\t\t\t  ");
+    printf("\n\n\t\t\t\t\t\t   #############    \n");     
+	printf("\t\t\t\t\t\t   ##         ##     \n"); 
+	printf("\t\t\t\t\t\t   #  ~~   ~~  #     \n");
+	printf("\t\t\t\t\t\t   #  ()   ()  #      \n");
+	printf("\t\t\t\t\t\t   (     ^     )      \n");
+	printf("\t\t\t\t\t\t    |         |       \n");
+	printf("\t\t\t\t\t\t    |  \\___/  |     \n");
+	printf("\t\t\t\t\t\t     \\       /      \n");
+	printf("\t\t\t\t\t\t    /  -----  \\     \n");
+	printf("\t\t\t\t\t\t ---  |%%\\ /%%|  ---    \n");
+	printf("\t\t\t\t\t\t/     |%%%%%%%%%%|     \\  \n");
+	printf("\n\n\t\t\t\t Bisa saya bantu?");
+	printf("\n\t\t\t\t1. Pesan");
+	printf("\n\t\t\t\t2. Bantuan\n\n\n");
 	switch(getch()){
 		case '1':
-			x=1;
-			price=food1(user.name, user.cash, checkUseAccount);
+			price=food(user.name, user.cash, checkUseAccount);
 			break;
 		case '2':
-			x=1;
-			price=food2(user.name, user.cash, checkUseAccount);
-			break;
-		case '3':
-			x=1;
-			price=food3(user.name, user.cash, checkUseAccount);
-			break;
-		case '4':
-			x=2;
-			price=food4(user.name, user.cash, checkUseAccount);
-			break;
-		case '5':
-			x=2;
-			price=food5(user.name, user.cash, checkUseAccount);
-			break;
-		case '6':
-			x=2;
-			price=food6(user.name, user.cash, checkUseAccount);
-			break;
-		case '7':
-			x=3;
-			price=food7(user.name, user.cash, checkUseAccount);
-			break;
-		case '8':
-			x=3;
-			price=food8(user.name, user.cash, checkUseAccount);
-			break;
-		case '9':
-			x=3;
-			price=food9(user.name, user.cash, checkUseAccount);
+			helpMenu();
+			return pesan();
 			break;
 		case ESC:
 			menu();
-		case '0':
-			system("cls");
-			system("color 30");
-			if(checkUseAccount == 1){
-				printf("\n    User: %s", user.name);
-				printf("\n    Saldo: Rp %d", user.cash);
-				printf("\n\n");
-			}
-			printf("\n\n\n\n\n\t\t\t\tMasukan restoran yang ingin anda pesan!\n\t\t\t  ");
-			printf("\tMasukan angka sesuai restoran Anda tuju!\n\t\t\t  ");
-			printf("\t(Ketik 0 untuk ganti halaman, ESC untuk kembali ke halaman utama) \n\t\t\t  ");
-			printf("\n\n\t\t\t\tD. Jakarta Timur");
-			printf("\n\t\t\t\t1. Coto Nusantara Cipinang");
-			printf("\n\t\t\t\t2. Konro Karebosi");
-			printf("\n\t\t\t\t3. Pondok Raya Minahasa");
-			printf("\n\n\t\t\t\tE. Jakarta Selatan");
-			printf("\n\t\t\t\t4. Ampera Garden Food Festival");
-			printf("\n\t\t\t\t5. Pusat Kuliner Kalibata");
-			printf("\n\t\t\t\t6. Kitong Serasa Resto\n\n\n");
-			switch(getch()){
-			case '1':
-				x=4;
-				price=food10(user.name, user.cash, checkUseAccount);
-				break;
-			case '2':
-				x=4;
-				price=food11(user.name, user.cash, checkUseAccount);			
-				break;
-			case '3':
-				x=4;
-				price=food12(user.name, user.cash, checkUseAccount);
-				break;
-			case '4':
-				x=5;
-				price=food13(user.name, user.cash, checkUseAccount);			
-				break;
-			case '5':
-				x=5;
-				price=food14(user.name, user.cash, checkUseAccount);			
-				break;
-			case '6':
-				x=5;
-				price=food15(user.name, user.cash, checkUseAccount);			
-				break;
-			case '0':
-				pesan();
-				break;
-			case ESC:
-				menu();
-				break;
-			default:
-				printf ("Input salah !\n");
-				printf ("Masukan angka menu dengan benar.\n");
-				system("pause");
-				return pesan();
-			}
-		break;
 		default:
 			printf ("Input salah !\n");
 			printf ("Masukan angka menu dengan benar.\n");
 			system("pause");
 			return pesan();
-	}
+	}	
 	
-	void address() {
-		system("cls");
-		system("color 30");
-		if(checkUseAccount == 1){
-			printf("\n    User: %s", user.name);
-			printf("\n    Saldo: Rp %d", user.cash);
-			printf("\n\n\n\n\n");
-		}
-		/*Menentukan alamat user 1*/
-		printf("\n\n\n\n\n\t\t\t\tMasukan Alamat Domisili Anda!\n\t\t\t  ");
-		printf("\n\t\t\t\t1. Jakarta Pusat");
-		printf("\n\t\t\t\t2. Jakarta Barat");
-		printf("\n\t\t\t\t3. Jakarta Utara");
-		printf("\n\t\t\t\t4. Jakarta Timur");
-		printf("\n\t\t\t\t5. Jakarta Selatan\n\n");	
-		printf("\t\t\t\tMasukan pilihan Anda: ");	
-		switch(getch()){
-			case '1':
-				y = 1;
-				printf("\n\t\t\t\tDomisili = Jakarta Pusat");
-				Sleep(1000);
-				break;
-			case '2':
-				y = 2;
-				printf("\n\t\t\t\tDomisili = Jakarta Barat");
-				Sleep(1000);
-				break;
-			case '3':
-				y = 3;
-				printf("\n\t\t\t\tDomisili = Jakarta Utara");
-				Sleep(1000);
-				break;
-			case '4':
-				y = 4;
-				printf("\n\t\t\t\tDomisili = Jakarta Timur");
-				Sleep(1000);
-				break;
-			case '5':
-				y = 5;
-				printf("\n\t\t\t\tDomisili = Jakarta Selatan");
-				Sleep(1000);
-				break;
-			default:
-				printf ("\n\t\t\t\tInput salah !\n");
-				printf ("\t\t\t\tMasukan angka menu dengan benar.\n");
-				printf("\t\t\t\t");
-				system("pause");
-				return address();
-				
-		}
-		
-	}
-	address();
 	Sleep(1000);
 	fflush(stdin);
 	printf("\n\t\t\t\tTekan tombol apapun untuk melanjutkan...");
 	getch();
-	/*Menentukan alamat user bagian 2*/
-	printf("\n\n\t\t\t\tAlamat lokasi tujuan anda: ");
-	fgets(alamatTujuan, 100, stdin);
 	Sleep(500);
 	system("cls");
 	system("color 30");
@@ -323,8 +187,10 @@ char pesan()
 		printf("\n    User: %s", user.name);
 		printf("\n    Saldo: Rp %d", user.cash);
 		printf("\n\n\n\n\n");
+	} else {
+		price = -price;
 	}
-	printf("\n\n\n\n\n\n\t\t\t\t\t    Pesanan sedang dikonfirmasi.");
+	printf("\n\n\n\n\n\n\t\t\t\t\t    Pesanan sedang diproses.");
 	Sleep(400);
 	printf(".");
 	Sleep(400);
@@ -333,14 +199,14 @@ char pesan()
 	char check;
 	process = 1;
 	
-	price+=distance(x, y);
 
 	/*Mencetak struk pemesanan sebelum dilakukan transaksi. Jika saldo belum mencukupi, diarahkan ke menu top up saldo*/
 	do {	
-		struk(user.name, user.cash, alamatTujuan);
-		
-		printf("\n\n\t\t\t\tHarga Ongkos\t\t\tRp %d", distance(x, y));
-		printf("\n\n\t\t\t\tTOTAL\t\t\t\tRp %d", price);
+		if(checkUseAccount == 1) {
+			printf("\n\n\t\t\t\tTOTAL\t\t\t\tRp %d", price);
+		} else {
+			printf("\n\n\t\t\t\tTOTAL\t\t\t\tRp %d", -price);
+		}
 		printf("\n\n\t\t\t\tApakah Anda ingin melanjutkan pembayaran: (y/n) ");
 		scanf(" %c", &check);
 		if(user.cash-price<0) {
@@ -353,7 +219,7 @@ char pesan()
 		}
 	} while(check =='n' || user.cash-price<0);
 	/* Pengecekan looping untuk mengecek apakah saldo sudah cukup untuk membayar pesanan atau belum*/
-	size=0;
+
 	user.cash-=price;
 	system("cls");
 	system("color 30");
@@ -421,6 +287,13 @@ char discountMenu(){
 		printf("\n    User: %s", user.name);
 		printf("\n    Saldo: Rp %d", user.cash);
 		printf("\n\n\n\n\n");
+	} else {
+		printf("\n\t\tMohon maaf, kupon hanya dapat dibagikan pada akun yang telah terdaftar");
+		Sleep(400);
+		printf("\n\n");
+		printf("\n\nKetik apapun untuk kembali...");
+		getch();
+		menu();
 	}
 	printf("\n\n\n\n\n\n");
 	printf("\t\t\t\t\t Cara menggunakan Restaurant Virtual System:\n\n");
@@ -576,8 +449,12 @@ char refillMenu() {
 		}
 		else{
 			printf("\n\t\t\t\t\t   User: Tidak Menggunakan Account");
-			printf("\n\t\t\t\t\t\tSaldo Sekarang: Rp %d", user.cash);
+			printf("\n\t\t\t\t\t   Anda tidak dapat mengisi saldo");
+			Sleep(400);
 			printf("\n\n\n");
+			printf("\n\nKetik apapun untuk kembali...");
+			getch();
+			menu();
 		}
 		/*3 Metode top-up:*/
 		printf("Pilih metode top up:\n\n");
