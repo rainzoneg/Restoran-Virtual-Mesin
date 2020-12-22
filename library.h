@@ -6,11 +6,11 @@ struct node {
 	struct node *next;  //listnode pointer
 };
 
-void insert();
-void display();
-void removeId();
-void proses(int num, char* food, int num_1);
-int count();
+void insert(); /*Masukan data pada node yang diproses pada fungsi proses*/
+void display(); /*Menampilkan daftar listnode*/
+void removeId(); /*Menghapus data node pada listnode*/
+void proses(int num, char* food, int num_1); /*Masukan data pada node*/
+int count(); /*Menampilkan daftar listnode dan harga total*/
 int Id, total;
 
 
@@ -148,8 +148,10 @@ void proses(int num, char* food, int num_1) {
 	printf("\n\t\t\t\t\tBerapa porsi: ");
 	scanf("%d", &item);
 	
+	//linked list
 	temp = (data*) malloc(sizeof (data));
 	
+	/*Masukan data pada node temp*/
 	temp->id =num;
 	temp->name=food;
 	temp->price=num_1;
