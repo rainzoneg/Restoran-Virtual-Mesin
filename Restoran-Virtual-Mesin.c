@@ -11,9 +11,11 @@
 struct Account{
 	char name[100];
 	char password[100];
+	//Arrays
 	int cash;
 }user;
-
+//Structures
+/*Ini merupakan struct mengenai data account user yang terdiri dari username, password, serta jumlah saldo account, data ini disimpan di file .txt*/
 char filename[50] = "account.txt";
 int process;
 char menu();
@@ -22,11 +24,15 @@ char pesan1();
 char login();
 char signup();
 int checkUseAccount;
+int checkDiscount = 0;
+int checkPromo1 = 1, checkPromo2 = 1, checkPromo3 = 1;
 void helpMenu();
 char refillMenu();
 char discountMenu();
+//Modular Programming
 
 int main(){
+	/*Berbasis User Friendly Programming, program diisi dengan menu-menu yang dapat dipilih user*/
 	fflush(stdin);
 	system("cls");
 	system("color F0");
@@ -34,6 +40,7 @@ int main(){
 	printf("\t\t\t\t\t Apakah anda ingin masuk menggunakan akun?\n\n\n");
 	printf("\t\t\t\t\t\t1.Ya, akses dengan akun\n\n");
 	printf("\t\t\t\t\t\t2.Tidak, akses tanpa akun.\n\n");
+	/*Menggunakan switch untuk menentukan apakah user ingin menggunakan program dengan akun atau tanpa akun*/
 	switch(getch()){
 		case '1':
 			system("cls");
@@ -42,6 +49,7 @@ int main(){
 			printf("\t\t\t\t\t\tSign-Up / Login Akun\n\n\n");
 			printf("\t\t\t\t\t\t1.Login\n\n");
 			printf("\t\t\t\t\t\t2.Sign-up akun baru.\n\n");
+			/*Switch untuk menentukan apakah ingin login dengan akun yang sudah ada atau membuat akun baru*/
 			switch(getch()){
 				case '1':
 					login();
@@ -57,6 +65,7 @@ int main(){
 			break;
 		case '2':
 			checkUseAccount = 0;
+			/*checkUseAccount menandakan apakah user sedang menggunakan akun atau tidak*/
 			menu();
 			break;
 		default:
@@ -70,6 +79,7 @@ char menu(){
 	fflush(stdin);
 	system("cls");
 	system("color E0");
+	/*Apabila menggunakan akun, maka akan muncul tampilan info akun user di pojok atas kiri*/
 	if(checkUseAccount == 1){
 		printf("\n    User: %s", user.name);
 		printf("\n    Saldo: Rp %d", user.cash);
@@ -112,7 +122,7 @@ char menu(){
 			return menu();
 			break;
 		case '5':
-			/*Ketika logout, maka dikeluarkan dari menu dan kembali ke menu awal*/
+			/*Ketika logout, maka dikeluarkan dari main menu dan kembali ke menu awal*/
 			main();
 			break;
 		case '6':
@@ -125,6 +135,8 @@ char menu(){
 			printf ("Masukan angka menu dengan benar.\n");
 			system("pause");
 			return menu();
+			//Recursion
+			/*Sistem menu di program menggunakan recursion dimana kembali ke fungsinya sendiri (kembali ke main menu lagi)*/
 	}
 }
 
@@ -132,10 +144,10 @@ char pesan()
 {
 	/*Fungsi yang menangani proses pemesanan makanan/minuman dari restoran*/
 	fflush(stdin);
-
 	char restoran[100];
 	int x;
 	int y;
+	/*Variable x dan y untuk menyimpan hasil return strcmp pada penyimpanan/updating file .txt nanti*/
 	int price;
 	system("cls");
 	system("color 30");
@@ -163,6 +175,7 @@ char pesan()
 	switch(getch()){
 		case '1':
 			price=food(user.name, user.cash, checkUseAccount);
+			/*Menu dan fungsi-fungsi pemesanan beserta harga akan dieksekusi dan dihitung menggunakan fungsi di library .h*/
 			break;
 		case '2':
 			helpMenu();
@@ -191,6 +204,7 @@ char pesan()
 	} else {
 		price = -price;
 	}
+	/*checkUseAccount membedakan cara pembayaran berdasarkan akun, jika tidak menggunakan akun, pembayaran secara langsung tanpa sistem saldo*/
 	printf("\n\n\n\n\n\n\t\t\t\t\t    Pesanan telah diterima.");
 	Sleep(400);
 	printf(".");
@@ -199,8 +213,11 @@ char pesan()
 	Sleep(500);
 	char check;
 	process = 1;
-	
-
+	/*checkDiscount menentukan apakah user sedang menggunakan promo diskon 25%, dan menghitung harga setelah didiskon*/
+	if(checkDiscount == 1){
+		printf("\n\n\t\t\t\tDiskon 25%% dipakai!");
+		price = price * 0.75;
+	}
 	/*Mencetak struk pemesanan sebelum dilakukan transaksi. Jika saldo belum mencukupi, diarahkan ke menu top up saldo*/
 	do {	
 		if(checkUseAccount == 1) {
@@ -216,6 +233,7 @@ char pesan()
 			scanf(" %c", &check);
 			if(check=='y') {
 				refillMenu();
+				/*Jika pembayaran menggunakan saldo akun dan saldo tidak mencukupi, user diarahkan ke menu refill saldo*/
 			}
 		}
 	} while(check =='n' || user.cash-price<0);
@@ -243,6 +261,7 @@ char pesan()
 	Sleep(500);
 	displayAnimation();
 	displayAnimation();
+	/*Fungsi ini menampilkan animasi pemrosesan pesanan yang disimpan di library jurumasak.h*/
 	Sleep(1000);
 	system("cls");
 	system("color 30");
@@ -253,16 +272,24 @@ char pesan()
 	}
 	printf("\n\n\n\n\n\n\t\t\t\t\t\tPesanan Selesai!");
 	process = 0;
+	/*Dibawah merupakan algoritma untuk mengupdate saldo account user di database account.txt setelah terjadi pembayaran (pengurangan saldo)*/
 	char line[128];
+	/*array buffer untuk menyimpan teks di file .txt to memory*/
 	int notFound = 0;
 	char updateName[100];
 	char updatePassword[100];
 	char updateSaldo[100];
+	/*Variable username,password,dan saldo dari file txt disimpan ke variable diatas untuk di lakukan strcmp dengan account user yang dipakai sekarang*/
 	FILE *fPtr;
 	FILE *fPtr2;
+	//Pointers
+	/*Pointer ke tipe data FILE, untuk pemrosesan file eksternal*/
 	int lnum = 0, lineCount = 0;
+	/*Menentukan indeks baris keberapa yang akan diupdate informasi nya*/
 	char string[256];
+	/*Array menyimpan dan mencetak teks line file .txt*/
 	fPtr = fopen(filename, "r");
+	/*fopen membuka file, yaitu account.txt (filename), r menandakan mode reading*/
 	if (fPtr)
 	{
 		while(fgets(line, sizeof(line), fPtr))
@@ -288,31 +315,35 @@ char pesan()
 	}	
 	fPtr = fopen(filename, "r");
 	fPtr2 = fopen("temp.txt", "w");
+	/*Mengupdate/overwrite sebuah line spesifik dengan cara menggunakan sebuah file.txt kedua sebagai temporary/buffer*/
 	while (!feof(fPtr)) {
             strcpy(string, "\0");
             fgets(string, sizeof(string), fPtr);
             if (!feof(fPtr)) {
                 lineCount++;
-                /* skip the line at given line number */
+                /* Mencetak lines dari file asal ke file temp tanpa mengubah isinya, kecuali saat sampai ke line yang ingin diubah (yang sesuai dengan data akun yang sedang dipakai user) */
                 if (lineCount != lnum) {
                     fprintf(fPtr2, "%s", string);
                 } 
 				else {
-                    /* replacing with new input line */
+                    /* Line yang ingin diubah/update, dioverwrite dengan data baru */
                     fprintf(fPtr2, "Username:%s Password:%s Saldo:%d\n", user.name, user.password, user.cash);
                 }
             }
     }
     fclose(fPtr);
     fclose(fPtr2);
+    /*Menutup dan menyimpan file*/
     remove(filename);
     rename("temp.txt", filename);
+    /*Menghapus file lama, dan mengubah nama file temp baru menjadi account.txt yang baru setelah diupdate*/
 	Sleep(400);
 	getch();
 }
 
 
 void helpMenu(){
+	/*Menu untuk menampilkan bantuan*/
 	system("cls");
 	system("color E0");
 	if(checkUseAccount == 1){
@@ -349,6 +380,7 @@ void helpMenu(){
 }
 
 char discountMenu(){
+	/*Menu untuk promo dan diskon yang disediakan bagi user yang menggunakan Account*/
 	system("cls");
 	system("color B0");
 	if(checkUseAccount == 1){
@@ -362,28 +394,59 @@ char discountMenu(){
 		printf("\n\n\t\t\t\t\t    Ketik apapun untuk kembali...");
 		getch();
 		menu();
+		/*Jika user non-akun membukan menu ini, akan ditolak dan dikembalikan ke main menu*/
 	}
 	printf("\n\n");
 	printf("\t\t\t\t\t Diskon dan Promo yang tersedia:\n\n");
-	printf("\t\t\t\t\t   1. Bonus saldo Rp.10000\n\n\n ");
-	printf("\t\t\t\t\t   2. Bonus saldo Rp.20000 \n\n\n");
-	printf("\t\t\t\t\t   3. Potongan diskon 25% \n\n\n");
-	printf("\t\t\t\t\t   4. Placeholder \n\n\n");
-	printf("\t\t\t\t\t   5. Kembali ke menu");
+	printf("\t\t\t  PS.Promo yang dipakai berlaku hanya selama periode kunjungan yang sama.\n\n");
+	if(checkPromo1 == 1){
+		printf("\t\t\t\t\t   A. Bonus saldo Rp.10000\n\n\n ");
+	}
+	if(checkPromo2 == 1){
+		printf("\t\t\t\t\t   B. Bonus saldo Rp.20000 \n\n\n");	
+	}
+	if(checkPromo3 == 1){
+		printf("\t\t\t\t\t   C. Potongan diskon 25%% \n\n\n");
+	}
+	printf("\t\t\t\t\t   X. Kembali ke menu");
 	switch(getch()){
-		case '1':
-			printf("\nPlaceholder");
+		case 'a':
+			printf("\n\n\t\t\t\t\t Please wait.");
+			Sleep(400);
+			printf(".");
+			Sleep(400);
+			printf(".");
+			Sleep(500);
+			user.cash+=10000;
+			printf("\n\n\t\t\t\t\t Memakai bonus saldo Rp.10000!");
+			checkPromo1 = 0;
+			Sleep(500);
 			break;
-		case '2':
-			printf("\nPlaceholder");
+		case 'b':
+			printf("\n\n\t\t\t\t\t Please wait.");
+			Sleep(400);
+			printf(".");
+			Sleep(400);
+			printf(".");
+			Sleep(500);
+			user.cash+=20000;
+			printf("\n\n\t\t\t\t\t Memakai bonus saldo Rp.20000!");
+			checkPromo2 = 0;
+			Sleep(500);
 			break;
-		case '3':
-			printf("\nPlaceholder");
+		case 'c':
+			printf("\n\n\t\t\t\t\t Please wait.");
+			Sleep(400);
+			printf(".");
+			Sleep(400);
+			printf(".");
+			Sleep(500);
+			printf("\n\n\t\t\t\t\t Memakai potongan diskon 25%%!");
+			checkDiscount = 1;
+			checkPromo3 = 0;
+			Sleep(500);
 			break;
-		case '4':
-			printf("\nPlaceholder");
-			break;
-		case '5':
+		case 'x':
 			menu();
 			break;
 		case ESC:
@@ -393,12 +456,13 @@ char discountMenu(){
 			printf ("Input salah !\n");
 			printf ("Masukan angka menu dengan benar.\n");
 			system("pause");
-			return pesan();
+			return menu();
 	}	
 }
 
 char login(){
 	/*Fungsi untuk login user*/
+	/*Saat login ke account tertentu, program akan membaca tentang informasi akun dari database eksternal account.txt untuk diload*/
 	int x,y;
 	int n = 1;
 	int notFound = 0;
@@ -406,6 +470,9 @@ char login(){
 	char line[128];
 	char *cashPtr;
 	FILE *fPtr;
+	//Pointers
+	/*Pointer untuk tipe data FILE untuk bekerja dengan file eksternal*?
+	/Pointer cashPtr sebagai pointer terhadap string Saldo dari file .txt (semua data di .txt dalam string, untuk saldo dikonversikan ke int saat dibaca)*/
 	char updateCash[100];
 	
 	do{
@@ -421,6 +488,7 @@ char login(){
 		printf("\t\t\t\t\tPassword:    ");
 		fgets(pwLogin, 100, stdin);
 		pwLogin[strcspn(pwLogin, "\n")] = 0;
+		/*Fungsi fgets menghasilkan karakter newline /n diakhir string, untuk keperluan ini /n tersebut dihilangkan dengan strcspn*/
 		/*Pengecekkan informasi login user dengan membandingkan string login dengan string dari database accounts (account.txt)*/
 		fPtr = fopen(filename, "r");
 		if (fPtr)
@@ -431,8 +499,12 @@ char login(){
 		    	if(sscanf(line, "Username:%99s Password:%99s Saldo:%99s", user.name, user.password, updateCash) == 3){
 		    		x = strcmp(unLogin, user.name);
 			    	y = strcmp(pwLogin, user.password);	
+			    	/*while fgets line dan sscanf adalah fungsi looping untuk menerima data variable dari account.txt serta looping per baris untuk membandingkan baris yang 
+					berisi data account yang sesuai dengan yang diinginkan(yang sedang dipakai untuk login), dan mengetahui baris yang sesuai dengan membandingkan kesamaan variable string
+					login unLogin dan pwLogin beserta username dan password di database, menggunakan strcmp*/
 			        if (x == 0 && y == 0) {
 			        	user.cash = strtol(updateCash, &cashPtr, 10);
+			        	/*Membaca saldo dari account.txt dalam bentuk string di updateCash, konversikan updateCash tersebut ke integer untuk variable user.cash, dengan strtol*/
 	                    printf("\n\t\t\t\t\t>>>User dan password terverifikasi!<<<\n");
 	                    notFound = 0;
 	                    n = 0;
@@ -467,6 +539,7 @@ char login(){
 }
 
 char signup(){
+	/*Fungsi modular yang menangani fungsi sign-up atau pembuatan akun baru*/
 	fflush(stdin);
 	char texting[100];	
 	FILE *fPtr;
@@ -474,12 +547,15 @@ char signup(){
 	system("cls");
 	system("color F0");
 	sprintf(texting, "%s", filename);
+	/*Membuka file bernama filename (account.txt) dengan isi teks texting*/
 	fPtr = fopen(texting, "a");
+	/*Membuka file tersebut dalam mode "a": append (menambahkan)*/
 	
 	if(fPtr == NULL){
 		printf("File tidak ditemukkan! Invalid!");
 		exit(EXIT_FAILURE);
 	}
+	/*Apabila file tidak dapat dibuat/ditemukan dan dibuka*/
 	
 	/*Sign-Up Akun User*/
 	printf("\n\n\n\n\n\n\n\n");
@@ -505,15 +581,18 @@ char signup(){
 	}
 	fprintf(fPtr, "Password:%s ", user.password);
 	fprintf(fPtr, "Saldo:0\n");
+	/*Mencetak line baru berisi data akun baru dengan format:"Username: Password: Saldo: \n*/
 	fclose(fPtr);
 }
 
 char refillMenu() {
 	/*Fungsi untuk menangani refill/top-up saldo user*/
 	int mobileNumber = 0;
+	/*Menyimpan variable nomor hp user jika refill menggunakan mobile cash*/
 	system("cls");
 	system("color 9F");
 	int a = 0;
+	/*Variable menyimpan penambahan saldo*/
 	char line[128];
 	int loopCheck = 0;
 	int notFound = 0;
@@ -540,6 +619,7 @@ char refillMenu() {
 			getch();
 			menu();
 		}
+		/*Menu refill hanya untuk user dengan account, jika user non-account, akan dikembalikan ke main menu*?
 		/*3 Metode top-up:*/
 		printf("Pilih metode top up:\n\n");
 		printf("1. Mobile Credit\n");
@@ -639,6 +719,7 @@ char refillMenu() {
 						printf ("Masukan angka menu dengan benar.\n");
 						system("pause");
 						return refillMenu();
+						//Recursion
 				}
 				break;
 			case '3':
@@ -675,6 +756,8 @@ char refillMenu() {
 		}
 	} while(a<5000);
 	user.cash+=a;
+	/*Kemudian saldo user akan ditambahkan dengan jumlah penambahan dalam variable a*/
+	/*Dibawah merupakan algoritma overwrite/update data saldo account di account.txt setelah refill*/
 	FILE *fPtr;
 	FILE *fPtr2;
 	int lnum = 0, lineCount = 0;
@@ -710,12 +793,12 @@ char refillMenu() {
             fgets(string, sizeof(string), fPtr);
             if (!feof(fPtr)) {
                 lineCount++;
-                /* skip the line at given line number */
+                /* Pada file temp baru, mencetak ulang baris-baris text lama, kecuali baris line yang akan diupdate/overwrite */
                 if (lineCount != lnum) {
                     fprintf(fPtr2, "%s", string);
                 } 
 				else {
-                    /* replacing with new input line */
+                    /* Meng-overwrite baris berisi data yang ingin diubah/update */
                     fprintf(fPtr2, "Username:%s Password:%s Saldo:%d\n", user.name, user.password, user.cash);
                 }
             }
@@ -724,7 +807,7 @@ char refillMenu() {
     fclose(fPtr2);
     remove(filename);
     rename("temp.txt", filename);
-
+	/*Menyimpan dan menutup file, menghapus file lama, dan merename file temp baru menjadi file account.txt yang baru yang sudah diupdate*/
 	Sleep(200);
 	printf("\nPlease wait.");
 	Sleep(400);
